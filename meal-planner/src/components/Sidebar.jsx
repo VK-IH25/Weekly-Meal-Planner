@@ -1,9 +1,16 @@
 import React from "react";
+import "../assets/styles/Sidebar.css";
 
 const Sidebar = () => {
   return (
-    <nav className="side-bar">
-      <h1>Side bar</h1>
+    <nav className="sidebar">
+      <ul>
+        <li>Plan</li>
+        <li>Groceries List</li>
+        <li>Add Recipe</li>
+        <li>Groceries Management</li>
+        <li>About</li>
+      </ul>
     </nav>
   );
 };

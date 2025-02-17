@@ -1,0 +1,30 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: var(--oxford-blue);
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  color: var(--white);
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar li:hover {
+  background-color: var(--orange-web);
+  color: var(--black);
+}
+
+.sidebar.gradient {
+  background: var(--gradient-top);
+}

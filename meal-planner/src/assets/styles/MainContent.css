@@ -35,6 +35,8 @@ h1 {
 .meal-table td {
   background-color: var(--white);
   color: var(--black);
+  width: 150px;
+  height: 150px;
 }
 
 .meal-table tr:nth-child(even) {

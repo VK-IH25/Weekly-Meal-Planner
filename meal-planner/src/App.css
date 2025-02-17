@@ -18,12 +18,16 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background-color: var(--oxford-blue);
   color: var(--white);
-  padding: 1rem;
-  text-align: center;
-  flex-shrink: 0;
-  width: 100%;
+  box-shadow: 0 2px 10px #0000001a;
+  padding: 1.3rem;
 }
 
 .content {
