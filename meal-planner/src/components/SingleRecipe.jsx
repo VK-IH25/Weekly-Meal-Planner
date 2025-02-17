@@ -40,7 +40,7 @@ function SingleRecipe(props) {
           </Center>
         </BackgroundImage>
 
-        <Group mb="30px" position="apart">
+        <Group mt="15px" mb="10px" position="apart">
           <Title>{recipeObj.strMeal}</Title>
           <Group>
             <Badge color="pink">{recipeObj.strArea}</Badge>
@@ -54,7 +54,7 @@ function SingleRecipe(props) {
           Ingredients:
         </Title>
         <Grid>
-          {[...Array(14).keys()].map((index) => {
+          {[...Array(20).keys()].map((index) => {
             const ingredient = recipeObj[`strIngredient${index + 1}`];
             const measure = recipeObj[`strMeasure${index + 1}`];
             return ingredient && measure ? (
@@ -67,7 +67,7 @@ function SingleRecipe(props) {
           })}
         </Grid>
 
-        <Title order={4} mb="20px">
+        <Title order={4} mt="20px" mb="20px">
           Instructions:
         </Title>
         <Text>{recipeObj.strInstructions}</Text>

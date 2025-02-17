@@ -1,11 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  FaList,
-  FaShoppingCart,
-  FaClipboardList,
-  FaInfoCircle,
-} from "react-icons/fa";
+import {  FaList,  FaShoppingCart,  FaClipboardList,  FaInfoCircle,} from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import "../assets/styles/Sidebar.css";
 
