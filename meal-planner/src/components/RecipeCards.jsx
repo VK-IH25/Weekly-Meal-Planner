@@ -1,21 +1,13 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core'
+import { Card, Image, Text, Badge, Button, Group, Title } from '@mantine/core'
 
-function RecipeCards() {
-    const [recipeList, setRecipeList] = useState([])
+function RecipeCards(props) {
 
-    useEffect(() => {
-        axios.get("https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json")
-            .then(r => {
-                setRecipeList(Object.values(r.data));
-                console.log(r.data)
-            })
-            .catch(e => console.log(e))
-    }, [])
 
-    const list = recipeList.map((e) => {
+    const list = props.recipeList.map((e) => {
         return (
+          
             <div key={e.idMeal} draggable={true} >
                 <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={150}>
                     
@@ -31,6 +23,7 @@ function RecipeCards() {
 
     return (
         <div>
+              <Title order={5}>Pick your recipes</Title>
             {list}
         </div>
     )

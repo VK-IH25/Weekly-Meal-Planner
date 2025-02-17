@@ -1,25 +1,14 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+
 import { Container, Card, Image, Title, Text, Badge, Button, Group, BackgroundImage, Center, Grid } from '@mantine/core'
 import { useParams } from 'react-router-dom'
 
-function SingleRecipe() {
-    const [recipeList, setRecipeList] = useState([])
-    const recipeId = "0"
+function SingleRecipe(props) {
+   const { id } = useParams()
 
-    useEffect(() => {
-        axios.get("https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json")
-            .then(r => {
-                setRecipeList(Object.values(r.data));
-                console.log(r.data)
-            })
-            .catch(e => console.log(e))
-    }, [])
+   console.log(id)
+   console.log(props.recipeList)
 
-    const recipeObj = recipeList[recipeId]
-
-
-
+    const recipeObj = props.recipeList.find((e) => e.idMeal == id)
 
 
     return (

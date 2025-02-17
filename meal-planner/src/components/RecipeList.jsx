@@ -1,23 +1,15 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core'
+import { Link } from 'react-router-dom'
 
-function RecipeList() {
-    const [recipeList, setRecipeList] = useState([])
+function RecipeList(props) {
+    
 
-    useEffect(() => {
-        axios.get("https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json")
-            .then(r => {
-                setRecipeList(Object.values(r.data));
-                console.log(r.data)
-            })
-            .catch(e => console.log(e))
-    }, [])
-
-    const list = recipeList.map((e) => {
+    const list = props.recipeList.map((e) => {
         return (
-            <div key={e.idMeal}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder mt="15px">
+           
+                <Card key={e.idMeal} shadow="sm" padding="lg" radius="md" withBorder mt="15px">
                     <Card.Section>
                         <Image
                             src={e.strMealThumb}
@@ -30,12 +22,13 @@ function RecipeList() {
                     <Group justify="space-between" mt="md" mb="xs">
                         <Text fw={500}>{e.strMeal}</Text>
                     </Group>
-
+                    <Link to={`/recipe/${e.idMeal}`}>
                     <Button color="blue" fullWidth mt="md" radius="md">
                         More
                     </Button>
+                    </Link>
                 </Card>
-            </div>
+            
 
         )
     })

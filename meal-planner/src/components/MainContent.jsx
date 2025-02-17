@@ -1,8 +1,9 @@
 import React from "react";
-import { Table } from "@mantine/core";
+import { Flex, Table, Title } from "@mantine/core";
 import "../assets/styles/MainContent.css";
+import RecipeCards from "./RecipeCards";
 
-const MainContent = () => {
+const MainContent = (props) => {
   const daysOfWeek = [
     "Monday",
     "Tuesday",
@@ -25,34 +26,47 @@ const MainContent = () => {
   };
 
   return (
-    <section className="main-content">
-      <h1>Weekly Meal Planner</h1>
-
-      <Table striped highlightOnHover className="meal-table">
-        <thead>
-          <tr>
-            <th>Meal Time</th>
-            {daysOfWeek.map((day) => (
-              <th key={day}>{day}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {mealTimes.map((mealTime) => (
-            <tr key={mealTime}>
-              <td>{mealTime}</td>
+    <Flex      
+    mih={50}
+    gap="md"
+    justify="center"
+    align="center"
+    direction="row"
+    >
+    
+      <div>
+        <RecipeCards recipeList={props.recipeList}></RecipeCards>
+      </div>
+      <div>
+        <Title order={3}>Weekly Meal Planner</Title>
+        <Table striped highlightOnHover withColumnBorders className={"meal-table"}>
+          <thead>
+            <tr>
+              <th>Meal Time</th>
               {daysOfWeek.map((day) => (
-                <td key={day}>
-                  {mealPlan[day]
-                    ? mealPlan[day][mealTimes.indexOf(mealTime)]
-                    : ""}
-                </td>
+                <th key={day}>{day}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </section>
+          </thead>
+          <tbody>
+            {mealTimes.map((mealTime) => (
+              <tr key={mealTime} style={{height:"150px"}}>
+                <td>{mealTime}</td>
+                {daysOfWeek.map((day) => (
+                  <td key={day}>
+                    {mealPlan[day]
+                      ? mealPlan[day][mealTimes.indexOf(mealTime)]
+                      : ""}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+
+   
+    </Flex>
   );
 };
 
