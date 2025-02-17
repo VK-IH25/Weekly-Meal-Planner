@@ -1,16 +1,55 @@
+/* Color Palette */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --black: #000000ff;
+  --oxford-blue: #14213dff;
+  --orange-web: #fca311ff;
+  --platinum: #e5e5e5ff;
+  --white: #ffffffff;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --gradient-top: linear-gradient(
+    0deg,
+    var(--black),
+    var(--oxford-blue),
+    var(--orange-web),
+    var(--platinum),
+    var(--white)
+  );
+  --gradient-right: linear-gradient(
+    90deg,
+    var(--black),
+    var(--oxford-blue),
+    var(--orange-web),
+    var(--platinum),
+    var(--white)
+  );
+}
+
+/* General Body Styles */
+body {
+  margin: 0;
+  font-family: var(
+    --font-family,
+    Inter,
+    system-ui,
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif
+  );
+  line-height: var(--line-height, 1.5);
+  background-color: var(--platinum);
+  color: var(--black);
+}
+
+/* Typography */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--black);
 }
 
 a {
@@ -18,23 +57,12 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* Button Styles */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -42,27 +70,35 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--oxford-blue);
+  color: var(--white);
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: var(--orange-web);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Light Mode Overrides */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
+    border-color: #e0e0e0;
+    color: var(--black);
   }
 }

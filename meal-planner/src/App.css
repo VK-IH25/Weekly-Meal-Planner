@@ -1,42 +1,107 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--platinum);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mantine-AppShell-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  background-color: var(--oxford-blue);
+  color: var(--white);
+  padding: 1rem;
   text-align: center;
+  flex-shrink: 0;
+  width: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.content {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.side-bar {
+  background-color: var(--oxford-blue);
+  color: var(--white);
+  width: 250px;
+  padding: 1rem;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.side-bar h1 {
+  color: var(--white);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.main-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+footer {
+  background-color: var(--oxford-blue);
+  color: var(--white);
+  padding: 1rem;
+  text-align: center;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .side-bar {
+    width: 200px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .main-content {
+    padding: 1rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 768px) {
+  header {
+    padding: 0.5rem;
+  }
+
+  .side-bar {
+    display: none;
+  }
+
+  .main-content {
+    padding: 1rem;
   }
 }
 
-.card {
-  padding: 2em;
-}
+@media (max-width: 480px) {
+  header {
+    padding: 0.5rem;
+  }
 
-.read-the-docs {
-  color: #888;
+  footer {
+    padding: 0.5rem;
+  }
+
+  .main-content {
+    padding: 0.5rem;
+  }
 }
