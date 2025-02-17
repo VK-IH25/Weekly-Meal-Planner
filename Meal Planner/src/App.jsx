@@ -10,19 +10,20 @@ function App() {
   return (
 
     <MantineProvider>{  
-
-
-
-
       <>
+
+
+
+
       <div className="header">Hello World</div>
+
+
+
+
+
+
       </>
-     
-     
-     
-     
-     
-     }</MantineProvider>
+      }</MantineProvider>
 
   )
 }
