@@ -1,23 +1,42 @@
 import React from "react";
-import "../assets/styles/Sidebar.css";
 import { Link } from "react-router-dom";
+import {
+  FaList,
+  FaShoppingCart,
+  FaClipboardList,
+  FaInfoCircle,
+} from "react-icons/fa";
+import { IoMdAddCircle } from "react-icons/io";
+import "../assets/styles/Sidebar.css";
 
 const Sidebar = () => {
   return (
     <nav className="sidebar">
       <ul>
-        <Link to="/">
-          <li>Plan</li>
-        </Link>
-        <Link to="/recipe-list">
-          <li>All recipes</li>
-        </Link>
-        <li>Groceries List</li>
-        <li>Add Recipe</li>
-        <li>Groceries Management</li>
-        <Link to="/about">
-          <li>About</li>
-        </Link>
+        <li>
+          <Link to="/">
+            <FaList /> Plan
+          </Link>
+        </li>
+        <li>
+          <Link to="/recipe-list">
+            <FaList /> All recipes
+          </Link>
+        </li>
+        <li>
+          <FaShoppingCart /> Groceries List
+        </li>
+        <li>
+          <IoMdAddCircle /> Add Recipe
+        </li>
+        <li>
+          <FaClipboardList /> Groceries Management
+        </li>
+        <li>
+          <Link to="/about">
+            <FaInfoCircle /> About
+          </Link>
+        </li>
       </ul>
     </nav>
   );

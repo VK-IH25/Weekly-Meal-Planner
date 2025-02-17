@@ -1,6 +1,13 @@
 import React from "react";
-import "../assets/styles/About.css";
-
+import {
+  Container,
+  Title,
+  Text,
+  Grid,
+  Card,
+  Image,
+  Anchor,
+} from "@mantine/core";
 import VictorImage from "../assets/img/profile/victor.jpeg";
 import KamranImage from "../assets/img/profile/kamran.png";
 
@@ -21,34 +28,54 @@ const devMembers = [
 
 function About() {
   return (
-    <div className="about-container">
-      <h1 className="about-title">Weekly Meal Planner Project</h1>
-      <p className="about-description">
-        This React.js project was developed by <b>{devMembers[0].name}</b> and{" "}
-        <b>{devMembers[1].name}</b>
-        &nbsp;as part of their learning journey at Ironhack.
-      </p>
+    <Container className="about-container" size="md">
+      <Title order={1} align="center" mb="md">
+        Weekly Meal Planner Project
+      </Title>
+      <Text align="center" mb="xl">
+        This React.js project was developed by{" "}
+        <strong>{devMembers[0].name}</strong> and{" "}
+        <strong>{devMembers[1].name}</strong> as part of their learning journey
+        at Ironhack.
+      </Text>
 
-      <h2 className="dev-title">Meet the Devs</h2>
-      <div className="dev-grid">
+      <Title order={2} align="center" mb="lg">
+        Meet the Devs
+      </Title>
+      <Grid gutter="xl">
         {devMembers.map((member, index) => (
-          <div key={index} className="dev-card">
-            <img src={member.image} alt={member.name} className="dev-image" />
-            <h3 className="dev-name">{member.name}</h3>
-            <p>
-              <a href={member.github} target="_blank" className="dev-link">
-                GitHub
-              </a>{" "}
-              |
-              <a href={member.linkedin} target="_blank" className="dev-link">
-                {" "}
-                LinkedIn
-              </a>
-            </p>
-          </div>
+          <Grid.Col span={6} key={index}>
+            <Card shadow="sm" padding="lg" radius="md" withBorder>
+              <Card.Section>
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  style={{
+                    width: 120,
+                    height: 120,
+                    borderRadius: "50%",
+                  }}
+                  mx="auto"
+                  mt="lg"
+                />
+              </Card.Section>
+              <Text align="center" weight={500} mt="md">
+                {member.name}
+              </Text>
+              <Text align="center" mt="sm">
+                <Anchor href={member.github} target="_blank" mr="sm">
+                  GitHub
+                </Anchor>
+                |
+                <Anchor href={member.linkedin} target="_blank" ml="sm">
+                  LinkedIn
+                </Anchor>
+              </Text>
+            </Card>
+          </Grid.Col>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </Container>
   );
 }
 
