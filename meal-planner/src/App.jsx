@@ -25,6 +25,7 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 
 import About from "./pages/About";
+import AddRecipe from "./components/AddRecipe";
 
 const App = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -43,6 +44,19 @@ const App = () => {
       })
       .catch((e) => console.log(e));
   }, []);
+
+  const addRecipe = function addRecipe (e) {
+    axios.post(
+      "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json",e
+    )
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
 
   return (
     <AppShell
@@ -89,6 +103,10 @@ const App = () => {
           <Route
             path="recipe/:id"
             element={<SingleRecipe recipeList={recipeList}></SingleRecipe>}
+          />
+            <Route
+            path="add-recipe"
+            element={<AddRecipe addRecipe={addRecipe}></AddRecipe>}
           />
           <Route path="about" element={<About></About>} />
         </Routes>

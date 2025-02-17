@@ -21,9 +21,11 @@ const Sidebar = () => {
         <li>
           <FaShoppingCart /> Groceries List
         </li>
+        <Link to="/add-recipe">
         <li>
           <IoMdAddCircle /> Add Recipe
         </li>
+        </Link>
         <li>
           <FaClipboardList /> Groceries Management
         </li>
