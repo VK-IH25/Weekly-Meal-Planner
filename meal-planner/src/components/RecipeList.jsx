@@ -1,19 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
+import { SimpleGrid, Card, Image, Text, Button, Group } from "@mantine/core";
 import { Link } from "react-router-dom";
 
 function RecipeList(props) {
   const list = props.recipeList.map((e) => {
     return (
-      <Card
-        key={e.idMeal}
-        shadow="sm"
-        padding="lg"
-        radius="md"
-        withBorder
-        mt="15px"
-      >
+      <Card key={e.idMeal} shadow="sm" padding="lg" radius="md" withBorder>
         <Card.Section>
           <Image src={e.strMealThumb} height={160} alt={e.strMeal} />
         </Card.Section>
@@ -30,7 +21,11 @@ function RecipeList(props) {
     );
   });
 
-  return <div>{list}</div>;
+  return (
+    <SimpleGrid cols={3} spacing="lg" verticalSpacing="lg">
+      {list}
+    </SimpleGrid>
+  );
 }
 
 export default RecipeList;

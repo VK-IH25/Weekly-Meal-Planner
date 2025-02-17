@@ -1,7 +1,6 @@
 import {
   Container,
   Card,
-  Image,
   Title,
   Text,
   Badge,

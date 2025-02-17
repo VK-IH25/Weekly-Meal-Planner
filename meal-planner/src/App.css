@@ -64,10 +64,8 @@ header {
 }
 
 footer {
-  background-color: var(--oxford-blue);
-  color: var(--white);
-  padding: 1rem;
-  text-align: center;
+  background-color: var(--white);
+  color: var(--oxford-blue);
   flex-shrink: 0;
   width: 100%;
 }
