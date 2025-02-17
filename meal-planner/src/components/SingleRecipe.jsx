@@ -1,63 +1,84 @@
-
-import { Container, Card, Image, Title, Text, Badge, Button, Group, BackgroundImage, Center, Grid } from '@mantine/core'
-import { useParams } from 'react-router-dom'
+import {
+  Container,
+  Card,
+  Image,
+  Title,
+  Text,
+  Badge,
+  Button,
+  Group,
+  BackgroundImage,
+  Center,
+  Grid,
+  Divider,
+} from "@mantine/core";
+import { useParams, useNavigate } from "react-router-dom";
 
 function SingleRecipe(props) {
-   const { id } = useParams()
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-   console.log(id)
-   console.log(props.recipeList)
+  const recipeObj = props.recipeList.find((e) => e.idMeal == id);
 
-    const recipeObj = props.recipeList.find((e) => e.idMeal == id)
-
-
+  if (!recipeObj) {
     return (
-        <>
-            <Container>
-            <BackgroundImage
-                    src={recipeObj.strMealThumb}
-                    radius="sm"
-                    h={250}
-                >
-                    <Center p="md">
-                        <Text c="white">
-                            BackgroundImage component can be used to add any content on image. It is useful for hero
-                            headers and other similar sections
-                        </Text>
-                    </Center>
-                </BackgroundImage>
-                <Group mb="30px"> 
-                    <Title>{recipeObj.strMeal}</Title>
-                    <Badge color="pink">{recipeObj.strArea}</Badge>
-                    <Badge color="pink">{recipeObj.strCategory}</Badge>
-                </Group>
-                <Divider my="md" />
-                <Title order={4} mb="20px">Ingredients:</Title>
-                <Grid>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient1} - {recipeObj.strMeasure1}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient2} - {recipeObj.strMeasure2}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient3} - {recipeObj.strMeasure3}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient4} - {recipeObj.strMeasure4}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient5} - {recipeObj.strMeasure5}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient6} - {recipeObj.strMeasure6}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient7} - {recipeObj.strMeasure7}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient8} - {recipeObj.strMeasure8}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient9} - {recipeObj.strMeasure9}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient10} - {recipeObj.strMeasure10}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient11} - {recipeObj.strMeasure11}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient12} - {recipeObj.strMeasure12}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient13} - {recipeObj.strMeasure13}</Text></Grid.Col>
-                    <Grid.Col span={6}><Text tt="Capitalize">{recipeObj.strIngredient14} - {recipeObj.strMeasure14}</Text></Grid.Col>
-                </Grid>
-                <Title order={4} mb="20px">Instructions:</Title>
-                <Text>{recipeObj.strInstructions}</Text>
+      <Container>
+        <Title>No Recipe Found</Title>
+        <Text>The recipe you are looking for does not exist.</Text>
+      </Container>
+    );
+  }
 
-                <Button mt={"20px"}>Go Back</Button>
-            </Container>
-        </>
+  return (
+    <Container>
+      <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={800}>
+        <BackgroundImage src={recipeObj.strMealThumb} radius="sm" h={250}>
+          <Center p="md">
+            <Text c="white" align="center">
+              {recipeObj.strMeal} - A delicious {recipeObj.strCategory} dish
+              from {recipeObj.strArea}
+            </Text>
+          </Center>
+        </BackgroundImage>
 
-    )
+        <Group mb="30px" position="apart">
+          <Title>{recipeObj.strMeal}</Title>
+          <Group>
+            <Badge color="pink">{recipeObj.strArea}</Badge>
+            <Badge color="pink">{recipeObj.strCategory}</Badge>
+          </Group>
+        </Group>
 
+        <Divider my="md" />
+
+        <Title order={4} mb="20px">
+          Ingredients:
+        </Title>
+        <Grid>
+          {[...Array(14).keys()].map((index) => {
+            const ingredient = recipeObj[`strIngredient${index + 1}`];
+            const measure = recipeObj[`strMeasure${index + 1}`];
+            return ingredient && measure ? (
+              <Grid.Col span={6} key={index}>
+                <Text tt="capitalize">
+                  {ingredient} - {measure}
+                </Text>
+              </Grid.Col>
+            ) : null;
+          })}
+        </Grid>
+
+        <Title order={4} mb="20px">
+          Instructions:
+        </Title>
+        <Text>{recipeObj.strInstructions}</Text>
+
+        <Button mt={"20px"} onClick={() => navigate(-1)}>
+          Go Back
+        </Button>
+      </Card>
+    </Container>
+  );
 }
 
-export default SingleRecipe
+export default SingleRecipe;
