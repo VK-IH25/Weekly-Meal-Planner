@@ -28,7 +28,7 @@ import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
 
 const App = () => {
-  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
+  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(true);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
   const [recipeList, setRecipeList] = useState([]);
