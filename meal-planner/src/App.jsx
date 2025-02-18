@@ -45,18 +45,26 @@ const App = () => {
       .catch((e) => console.log(e));
   }, []);
 
-  const addRecipe = function addRecipe (e) {
-    axios.post(
-      "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json",e
-    )
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  const addRecipe = (recipe) => {
+    const newRecipe = { ...recipe, idMeal: Date.now().toString() };
 
-  }
+    axios
+      .post(
+        "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json",
+        newRecipe
+      )
+      .then(() =>
+        axios.get(
+          "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+        )
+      )
+      .then((r) => {
+        setRecipeList(Object.values(r.data));
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  };
 
   return (
     <AppShell
@@ -104,7 +112,7 @@ const App = () => {
             path="recipe/:id"
             element={<SingleRecipe recipeList={recipeList}></SingleRecipe>}
           />
-            <Route
+          <Route
             path="add-recipe"
             element={<AddRecipe addRecipe={addRecipe}></AddRecipe>}
           />
