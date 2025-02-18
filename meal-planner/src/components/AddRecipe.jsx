@@ -8,7 +8,8 @@ function AddRecipe(props) {
   const [strArea, setStrArea] = useState("");
   const [strInstructions, setStrInstructions] = useState("");
   const [strMealThumb, setStrMealThumb] = useState("");
-  const [strIngredient1, setIngredient1] = useState("");
+  const [ingredients, setIngredients] = useState("");
+  const [measures, setMeasures] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,8 +22,24 @@ function AddRecipe(props) {
       strArea: strArea,
       strInstructions: strInstructions,
       strMealThumb: strMealThumb,
-      strIngredient1: strIngredient1,
     };
+
+    const ingredientList = ingredients
+      .split(",")
+      .map((ingredient) => ingredient.trim());
+    const measureList = measures.split(",").map((measure) => measure.trim());
+
+    const ingredientWithMeasures = ingredientList.map((ingredient, index) => ({
+      ingredient,
+      measure: measureList[index],
+    }));
+
+    ingredientWithMeasures.forEach((item, index) => {
+      if (item.ingredient) {
+        newRecipe[`strIngredient${index + 1}`] = item.ingredient;
+        newRecipe[`strMeasure${index + 1}`] = item.measure;
+      }
+    });
 
     props.addRecipe(newRecipe);
 
@@ -78,10 +95,17 @@ function AddRecipe(props) {
           onChange={(event) => setStrMealThumb(event.currentTarget.value)}
         />
         <TextInput
-          label="Ingredients"
-          placeholder="i.e. Cheese"
-          value={strIngredient1}
-          onChange={(event) => setIngredient1(event.currentTarget.value)}
+          label="Ingredients (comma separated)"
+          placeholder="i.e. Cheese, Tomato, Dough"
+          value={ingredients}
+          onChange={(event) => setIngredients(event.currentTarget.value)}
+        />
+
+        <TextInput
+          label="Measures (comma separated)"
+          placeholder="i.e. 1 cup, 2 tomatoes, 1 dough ball"
+          value={measures}
+          onChange={(event) => setMeasures(event.currentTarget.value)}
         />
         <Button type="submit" mt="md">
           Add Recipe
