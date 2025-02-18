@@ -58,7 +58,7 @@ const MainContent = (props) => {
                       onDragEnter={handleDragEnter}
                       bg={'var(--mantine-color-blue-light)'}
                       
-                      style={{border:"1px solid gray", padding:"10px", "border-radius": "8px"}}>
+                      style={{border:"1px solid gray", padding:"10px", borderRadius: "8px"}}>
             <RecipeCards recipeList={props.recipeList}></RecipeCards>
           </ScrollArea>
 
