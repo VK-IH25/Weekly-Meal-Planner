@@ -17,6 +17,8 @@ function SingleRecipe(props) {
   const { id } = useParams();
   const navigate = useNavigate();
 
+ 
+
   const recipeObj = props.recipeList.find((e) => e.idMeal == id);
 
   if (!recipeObj) {

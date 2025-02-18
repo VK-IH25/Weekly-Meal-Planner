@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Table, Title } from "@mantine/core";
+import { Flex, Table, Title, ScrollArea } from "@mantine/core";
 import "../assets/styles/MainContent.css";
 import RecipeCards from "./RecipeCards";
 
@@ -35,7 +35,10 @@ const MainContent = (props) => {
     >
     
       <div>
-        <RecipeCards recipeList={props.recipeList}></RecipeCards>
+      <ScrollArea h={500}>
+      <RecipeCards recipeList={props.recipeList}></RecipeCards> 
+         </ScrollArea>
+        
       </div>
       <div>
         <Title order={3}>Weekly Meal Planner</Title>
