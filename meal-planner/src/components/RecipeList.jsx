@@ -19,12 +19,11 @@ function RecipeList(props) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          position: "relative", 
+          position: "relative",
           color: "white",
           textShadow: "1px 1px 4px rgba(0, 0, 0, 0.7)",
         }}
       >
-       
         <Overlay
           color="#000"
           backgroundOpacity={0.35}
@@ -32,15 +31,24 @@ function RecipeList(props) {
             position: "absolute",
             bottom: 0,
             left: 0,
-            zIndex: 1, 
+            zIndex: 1,
             borderRadius: "inherit",
           }}
         />
 
-        
-        <Link to={`/recipe/${e.idMeal}`} style={{ color: "inherit", textDecoration: "none", position: "relative", zIndex: 2 }}>
+        <Link
+          to={`/recipe/${e.idMeal}`}
+          style={{
+            color: "inherit",
+            textDecoration: "none",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
           <Group justify="space-between" align="left" mt="md" mb="xs">
-            <Title order={3} color="#fff">{e.strMeal}</Title>
+            <Title order={3} color="#fff">
+              {e.strMeal}
+            </Title>
           </Group>
         </Link>
       </Card>
