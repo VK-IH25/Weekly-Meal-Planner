@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Table, Title, ScrollArea } from "@mantine/core";
+import { Flex, Table, Title, ScrollArea, Input } from "@mantine/core";
 import "../assets/styles/MainContent.css";
 import RecipeCards from "./RecipeCards";
 import { useState } from "react";
@@ -40,6 +40,16 @@ const MainContent = (props) => {
       setDragging(false);
     }
 
+    //search bar
+    const [query, setQuery] = useState(""); 
+  
+    const filteredList = props.recipeList.filter((recipe) =>
+      Object.values(recipe).some(
+        (value) =>
+          typeof value === "string" && value.toLowerCase().includes(query.toLowerCase())
+      )
+    );
+
 
     return (
       <Flex
@@ -59,7 +69,13 @@ const MainContent = (props) => {
                       bg={'var(--mantine-color-blue-light)'}
                       
                       style={{border:"1px solid gray", padding:"10px", borderRadius: "8px"}}>
-            <RecipeCards recipeList={props.recipeList}></RecipeCards>
+                <Input
+                    placeholder="Search"
+                    value={query}
+                    mb="20px"
+                    onChange={(event) => setQuery(event.target.value)} 
+                  />
+            <RecipeCards recipeList={filteredList}></RecipeCards>
           </ScrollArea>
 
         </div>

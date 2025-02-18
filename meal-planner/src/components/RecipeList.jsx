@@ -1,8 +1,19 @@
-import { SimpleGrid, Card, Overlay, Text, Group, Title } from "@mantine/core";
+import { SimpleGrid, Card, Overlay, Text, Group, Title, Autocomplete, Input } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function RecipeList(props) {
-  const list = props.recipeList.map((e) => {
+
+function RecipeList({ recipeList }) {
+  const [query, setQuery] = useState(""); 
+  
+  const filteredList = recipeList.filter((recipe) =>
+    Object.values(recipe).some(
+      (value) =>
+        typeof value === "string" && value.toLowerCase().includes(query.toLowerCase())
+    )
+  );
+
+  const list = filteredList.map((e) => {
     return (
       <Card
         key={e.idMeal}
@@ -45,7 +56,7 @@ function RecipeList(props) {
             zIndex: 2,
           }}
         >
-          <Group justify="space-between" align="left" mt="md" mb="xs">
+          <Group justifyContent="space-between" align="left" mt="md" mb="xs">
             <Title order={3} color="#fff">
               {e.strMeal}
             </Title>
@@ -56,10 +67,20 @@ function RecipeList(props) {
   });
 
   return (
-    <SimpleGrid cols={3} spacing="lg" verticalSpacing="lg">
-      {list}
-    </SimpleGrid>
+    <>
+      
+      <Input
+        placeholder="Search"
+        value={query}
+        mb="20px"
+        onChange={(event) => setQuery(event.target.value)} 
+      />
+      <SimpleGrid cols={3} spacing="lg" verticalSpacing="lg">
+        {list}
+      </SimpleGrid>
+    </>
   );
+  
 }
 
 export default RecipeList;
