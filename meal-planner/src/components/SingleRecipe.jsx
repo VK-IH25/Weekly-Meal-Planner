@@ -11,13 +11,30 @@ import {
   Grid,
   Divider,
 } from "@mantine/core";
+import axios from "axios";
+
 import { useParams, useNavigate } from "react-router-dom";
 
 function SingleRecipe(props) {
   const { id } = useParams();
   const navigate = useNavigate();
 
+
   const recipeObj = props.recipeList.find((e) => e.idMeal == id);
+
+  const handleDelete = async () => {
+    const response = await axios.get(
+      "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+    );
+    const data = response.data;
+    const recipeKey = Object.keys(data).find(
+      (key) => data[key].idMeal == id
+    );
+
+    props.deleteRecipe(recipeKey)
+  };
+
+
 
   if (!recipeObj) {
     return (
@@ -71,6 +88,8 @@ function SingleRecipe(props) {
           Instructions:
         </Title>
         <Text>{recipeObj.strInstructions}</Text>
+
+        <Button bg={"red"} mt="20px" onClick={() => handleDelete()}>Delete</Button>
 
         <Button mt={"20px"} onClick={() => navigate(-1)}>
           Go Back

@@ -9,7 +9,7 @@ import {
   Image,
   AppShellFooter,
 } from "@mantine/core";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { useDisclosure } from "@mantine/hooks";
@@ -266,6 +266,7 @@ const App = () => {
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
 
   const [recipeList, setRecipeList] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios
@@ -299,6 +300,32 @@ const App = () => {
         console.log("Error:", error);
       });
   };
+
+  const deleteRecipe = (key) => {
+    axios.delete(
+      `https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals/${key}.json`
+    )
+    .then(() =>
+      axios.get(
+        "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+      ))
+    .then((r) => {
+      setRecipeList(Object.values(r.data));
+    })
+    .then(() => {
+      navigate("/recipe-list"); // Navigate after the state has been updated
+    })
+    .catch((error) => {
+      console.error("Error deleting recipe:", error);
+    });
+};
+ 
+  
+ 
+
+
+
+
 
   //SCRIPT TO ADD MULTIPLE ITEMS TO DATABASE
   //WORKS BY CLICKING CREATE RECIPE BUTTON
@@ -362,7 +389,7 @@ const App = () => {
           />
           <Route
             path="recipe/:id"
-            element={<SingleRecipe recipeList={recipeList}></SingleRecipe>}
+            element={<SingleRecipe recipeList={recipeList} deleteRecipe={deleteRecipe}></SingleRecipe>}
           />
           <Route
             path="add-recipe"

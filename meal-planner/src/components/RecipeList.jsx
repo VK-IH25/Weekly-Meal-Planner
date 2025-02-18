@@ -5,13 +5,18 @@ import { useState } from "react";
 
 function RecipeList({ recipeList }) {
   const [query, setQuery] = useState(""); 
-  
+
+
+
+  //search
+
   const filteredList = recipeList.filter((recipe) =>
     Object.values(recipe).some(
       (value) =>
         typeof value === "string" && value.toLowerCase().includes(query.toLowerCase())
     )
   );
+
 
   const list = filteredList.map((e) => {
     return (
