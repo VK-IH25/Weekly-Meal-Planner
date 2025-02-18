@@ -16,16 +16,6 @@ const MainContent = (props) => {
   ];
   const mealTimes = ["Breakfast", "Lunch", "Dinner"];
 
-  const mealPlan = {
-    Monday: ["Eggs", "Grilled Chicken", "Pasta"],
-    Tuesday: ["Oatmeal", "Salad", "Steak"],
-    Wednesday: ["Pancakes", "Soup", "Fish"],
-    Thursday: ["Yogurt", "Burger", "Vegetables"],
-    Friday: ["Toast", "Pasta", "Pizza"],
-    Saturday: ["Cereal", "Sushi", "Burgers"],
-    Sunday: ["Smoothie", "BBQ", "Tacos"],
-  };
-
 
   //Drag and Drop
   const [dragging, setDragging] = useState(false);
@@ -96,9 +86,7 @@ const MainContent = (props) => {
                       onDragOver={handleDragOver}
                       onDragEnter={handleDragEnter}
                     >
-                      {mealPlan[day]
-                        ? mealPlan[day][mealTimes.indexOf(mealTime)]
-                        : ""}
+                     
                     </td>
                   ))}
                 </tr>
