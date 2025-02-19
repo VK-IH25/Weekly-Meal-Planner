@@ -29,6 +29,8 @@ import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
 import MealPlan from "./pages/MealPlan";
 
+
+
 const App = () => {
   //DATA TO POPULATE DATABASE USED IN FUNCTION BELOW
   // const data = [
@@ -354,16 +356,21 @@ const App = () => {
       <AppShell.Header className="header">
         <Group h="150%">
           <Burger
+            lineSize={3}
             opened={mobileOpened}
             onClick={toggleMobile}
             hiddenFrom="sm"
             size="sm"
+            className="burger"
+            styles={{ color: 'red' }}
           />
           <Burger
+            lineSize={3}
             opened={desktopOpened}
             onClick={toggleDesktop}
             visibleFrom="sm"
             size="sm"
+            className="burger"
           />
         </Group>
         <Link to="/">

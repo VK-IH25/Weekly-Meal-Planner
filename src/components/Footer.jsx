@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <footer className="footer" style={{ padding: "10px", textAlign: "center" }}>
-      <div>&copy; {currentYear} Food-Plano. All rights reserved.</div>
+      <div>&copy; {currentYear} ForkCast. All rights reserved.</div>
     </footer>
   );
 };

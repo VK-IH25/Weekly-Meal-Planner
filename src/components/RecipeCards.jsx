@@ -25,7 +25,7 @@ function RecipeCards(props) {
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
       >
-        <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={150}>
+        <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={""}>
           <Group justify="space-between">
             <Text fw={500} size="xs">
               {e.strMeal}
@@ -38,7 +38,7 @@ function RecipeCards(props) {
 
   return (
     <div>
-      <Title order={5}>Pick your recipes</Title>
+      <Title order={5} c={"var(--white)"}>Pick your recipes</Title>
       {list}
     </div>
   );

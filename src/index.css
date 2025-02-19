@@ -5,10 +5,11 @@
   font-weight: 400;
 
   --black: #000000ff;
-  --oxford-blue: #14213dff;
-  --orange-web: #fca311ff;
-  --platinum: #e5e5e5ff;
+  --oxford-blue: #3D8D7A; /*former #14213dff*/
+  --orange-web: #FBFFE4;
+  --platinum: #A3D1C6;
   --white: #ffffffff;
+  --offwhite: rgb(235, 235, 235);
 
   --gradient-top: linear-gradient(
     0deg,

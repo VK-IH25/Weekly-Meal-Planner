@@ -1,6 +1,7 @@
 import { SimpleGrid, Card, Overlay, Text, Group, Title, Autocomplete, Input } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 
 function RecipeList({ recipeList }) {
@@ -78,6 +79,7 @@ function RecipeList({ recipeList }) {
         placeholder="Search"
         value={query}
         mb="20px"
+        rightSection={<FaSearch />}
         onChange={(event) => setQuery(event.target.value)} 
       />
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }} spacing="lg" verticalSpacing="lg">

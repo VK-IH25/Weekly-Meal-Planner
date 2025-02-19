@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: var(--platinum);
+  background-color: var(--offwhite);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@ header {
 }
 
 .header{
-  background-color: #38ac7f;
+  background-color: #3D8D7A;
 }
 
 .content {
@@ -72,6 +72,10 @@ footer {
   color: var(--oxford-blue);
   flex-shrink: 0;
   width: 100%;
+}
+
+.draggable {
+  touch-action: none;
 }
 
 

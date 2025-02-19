@@ -3,11 +3,17 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, createTheme } from "@mantine/core";
+
+const theme = createTheme({
+  fontFamily: 'Montserrat',
+  fontFamilyMonospace: 'Monaco, Courier, monospace',
+  headings: { fontFamily: 'Montserrat' },
+});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MantineProvider theme={{ colorScheme: "light" }}>
+    <MantineProvider defaultColorScheme="light" theme={theme}>
       <BrowserRouter>
         <App />
       </BrowserRouter>

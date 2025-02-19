@@ -12,6 +12,7 @@ import {
 import "../assets/styles/MainContent.css";
 import RecipeCards from "./RecipeCards";
 import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 const MainContent = (props) => {
   const daysOfWeek = [
@@ -84,10 +85,10 @@ const MainContent = (props) => {
   );
 
   return (
-    <Container size="xl" px="md">
+    <Container size="xl" px="md" >
       <Grid gutter="md" align="stretch">
-        <Grid.Col span={{ base: 12, sm: 3 }}>
-          <Paper shadow="xs" p="md" h="100%">
+        <Grid.Col span={{ base: 12, sm: 3 }} >
+          <Paper p="md" h="100%" bg={"var(--platinum)"}>
             <ScrollArea
               h={500}
               id="origin"
@@ -95,7 +96,7 @@ const MainContent = (props) => {
               onDragLeave={handleDragLeave}
               onDragOver={handleDragOver}
               onDragEnter={handleDragEnter}
-              bg={"var(--mantine-color-blue-light)"}
+              bg={"var(--oxford-blue)"}
               style={{
                 border: "1px solid gray",
                 padding: "10px",
@@ -106,6 +107,7 @@ const MainContent = (props) => {
                 placeholder="Search"
                 value={query}
                 mb="20px"
+                rightSection={<FaSearch />}
                 onChange={(event) => setQuery(event.target.value)}
               />
               <RecipeCards recipeList={filteredList}></RecipeCards>
@@ -113,8 +115,8 @@ const MainContent = (props) => {
           </Paper>
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 9 }}>
-          <Paper shadow="xs" p="md" h="100%">
-            <Title order={3}>Weekly Meal Planner</Title>
+          <Paper  p="md" h="100%" bg={"var(--platinum)"}>
+            <Title order={3} c={"var(--oxford-blue)"}>Weekly Meal Planner</Title>
             <ScrollArea>
               <Table
                 striped
@@ -124,7 +126,7 @@ const MainContent = (props) => {
               >
                 <thead>
                   <tr>
-                    <th>Meal Time</th>
+                    <th >Meal Time</th>
                     {daysOfWeek.map((day) => (
                       <th key={day}>{day}</th>
                     ))}
