@@ -26,6 +26,7 @@ import Sidebar from "./components/Sidebar";
 
 import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
+import MealPlan from "./pages/MealPlan";
 
 const App = () => {
   //DATA TO POPULATE DATABASE USED IN FUNCTION BELOW
@@ -266,6 +267,7 @@ const App = () => {
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
 
   const [recipeList, setRecipeList] = useState([]);
+  const [mealPlan, setMealPlan] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -381,7 +383,7 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<MainContent recipeList={recipeList}></MainContent>}
+            element={<MainContent recipeList={recipeList} mealPlan={mealPlan} setMealPlan={setMealPlan}></MainContent>}
           />
           <Route
             path="recipe-list"
@@ -394,6 +396,10 @@ const App = () => {
           <Route
             path="add-recipe"
             element={<AddRecipe addRecipe={addRecipe}></AddRecipe>}
+          />
+          <Route
+            path="mealplan"
+            element={<MealPlan mealPlan={mealPlan} recipeList={recipeList}></MealPlan>}
           />
           <Route path="about" element={<About></About>} />
         </Routes>

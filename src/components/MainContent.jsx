@@ -16,24 +16,15 @@ const MainContent = (props) => {
   ];
   const mealTimes = ["Breakfast", "Lunch", "Dinner"];
 
-  const [mealPlan, setMealPlan] = useState({})
+
 
   const getRecipeName = (id) => {
-    return props.recipeList.find((r) => r.idMeal === id).strMeal
-  }
+    return props.recipeList.find((r) => r.idMeal === id)?.strMeal || "Unknown Recipe";
+  };
 
-  // Function to clear recipe from meal plan
+  // Function to remove a specific recipe from meal plan
   const clearRecipe = (day, mealTime, recipeId) => {
-    setMealPlan((prev) => {
-      const key = `${day}-${mealTime}`;
-      const updatedRecipes = prev[key]?.filter((id) => id !== recipeId) || [];
-      if (updatedRecipes.length === 0) {
-        // Remove the key entirely if no recipes remain
-        const { [key]: _, ...newMealPlan } = prev;
-        return newMealPlan;
-      }
-      return { ...prev, [key]: updatedRecipes };
-    });
+    props.setMealPlan((prev) => prev.filter((meal) => !(meal.day === day && meal.mealTime === mealTime && meal.recipeId === recipeId)));
   };
 
 
@@ -56,12 +47,12 @@ const MainContent = (props) => {
   const handleDrop = (ev, day, mealTime) => {
     ev.preventDefault();
     const recipeId = ev.dataTransfer.getData("text");
-    const key = `${day}-${mealTime}`;
 
-    setMealPlan((prev) => ({
+    props.setMealPlan((prev) => [
       ...prev,
-      [key]: [...(prev[key] || []), recipeId], // Append new recipe ID to existing array
-    }));
+      { day, mealTime, recipeId }, // Add a new meal entry as an object
+    ]);
+  
   
 
     setDragging(false);
@@ -124,24 +115,26 @@ const MainContent = (props) => {
                 <td>{mealTime}</td>
                 {daysOfWeek.map((day) => (
                   <td
-                    key={day}
-                    id={`${day}${mealTime}`}
-                    onDrop={(ev) => handleDrop(ev, day, mealTime)}
-                    onDragLeave={handleDragLeave}
-                    onDragOver={handleDragOver}
-                    onDragEnter={handleDragEnter}
-                  >
-                    {mealPlan[`${day}-${mealTime}`]?.map((recipeId) => (
-                      <div key={recipeId} style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
-                        {getRecipeName(recipeId)}
+                  key={day}
+                  id={`${day}${mealTime}`}
+                  onDrop={(ev) => handleDrop(ev, day, mealTime)}
+                  onDragLeave={handleDragLeave}
+                  onDragOver={handleDragOver}
+                  onDragEnter={handleDragEnter}
+                >
+                  {props.mealPlan
+                    .filter((meal) => meal.day === day && meal.mealTime === mealTime) // Filter meals for the current cell
+                    .map((meal) => (
+                      <div key={meal.recipeId} style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                        {getRecipeName(meal.recipeId)}
                         <CloseButton
                           size="xs"
                           style={{ marginLeft: "5px" }}
-                          onClick={() => clearRecipe(day, mealTime, recipeId)}
+                          onClick={() => clearRecipe(day, mealTime, meal.recipeId)}
                         />
                       </div>
                     ))}
-                  </td>
+                </td>
                 ))}
               </tr>
             ))}
