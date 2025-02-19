@@ -1,9 +1,9 @@
     MVP:
-    - Weekly calendar (very similar to the kanban board with D&D cards with recipes) - First genereic monday to sunday
-    - List of recipes (API - CRUD) (portions and quantities) - Look for a good recipe API to use as base
+ OK   - Weekly calendar (very similar to the kanban board with D&D cards with recipes) - First genereic monday to sunday 
+ OK   - List of recipes (API - CRUD) (portions and quantities) - Look for a good recipe API to use as base
     - List of ingredients (API - CRUD)
     - Shopping List (cross selected recipes x ingredients to generate a shopping list)
-    - Mantine CSS Framework (or MUI to be decided)
+ OK   - Mantine CSS Framework (or MUI to be decided)
 
     1.1
     - Inventory List
@@ -22,14 +22,14 @@
 
     Monday
 
-    - Navigation (navbar, sidebar, board)
+ OK   - Navigation (navbar, sidebar, board)
     - APIs
-    - Recipes List page
-    - Single recipe page
-    - Add recipe page
+ OK   - Recipes List page
+ OK  - Single recipe page
+ OK  - Add recipe page
     - Edit recipe page
-    - Main Page with the table
-    - Basic layout
+ OK   - Main Page with the table
+ OK   - Basic layout
 
 Color Pallete
 

@@ -26,9 +26,11 @@ const Sidebar = () => {
           <IoMdAddCircle /> Add Recipe
         </li>
         </Link>
+        <Link to="/mealplan">
         <li>
           <FaClipboardList /> Groceries Management
         </li>
+        </Link>
         <li>
           <Link to="/about">
             <FaInfoCircle /> About

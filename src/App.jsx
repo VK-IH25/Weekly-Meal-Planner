@@ -27,6 +27,7 @@ import EditRecipe from "./components/EditRecipe";
 
 import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
+import MealPlan from "./pages/MealPlan";
 
 const App = () => {
   //DATA TO POPULATE DATABASE USED IN FUNCTION BELOW
@@ -267,7 +268,8 @@ const App = () => {
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
 
   const [recipeList, setRecipeList] = useState([]);
-  const navigate = useNavigate();
+  const [mealPlan, setMealPlan] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios
@@ -377,7 +379,7 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<MainContent recipeList={recipeList}></MainContent>}
+            element={<MainContent recipeList={recipeList} mealPlan={mealPlan} setMealPlan={setMealPlan}></MainContent>}
           />
           <Route
             path="recipe-list"
@@ -397,15 +399,9 @@ const App = () => {
             element={<AddRecipe addRecipe={addRecipe}></AddRecipe>}
           />
           <Route
-            path="/edit-recipe/:id"
-            element={
-              <EditRecipe
-                recipeList={recipeList}
-                setRecipeList={setRecipeList}
-              />
-            }
+            path="mealplan"
+            element={<MealPlan mealPlan={mealPlan} recipeList={recipeList}></MealPlan>}
           />
-
           <Route path="about" element={<About></About>} />
         </Routes>
       </AppShell.Main>
