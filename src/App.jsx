@@ -268,8 +268,8 @@ const App = () => {
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
 
   const [recipeList, setRecipeList] = useState([]);
-  const [mealPlan, setMealPlan] = useState([])
-  const navigate = useNavigate()
+  const [mealPlan, setMealPlan] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -342,7 +342,7 @@ const App = () => {
   //   }
   // }
   return (
-    <AppShell 
+    <AppShell
       header={{ height: 60 }}
       navbar={{
         width: 250,
@@ -351,7 +351,7 @@ const App = () => {
       }}
       padding="xl"
     >
-      <AppShell.Header className="header"  >
+      <AppShell.Header className="header">
         <Group h="150%">
           <Burger
             opened={mobileOpened}
@@ -377,7 +377,13 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<MainContent recipeList={recipeList} mealPlan={mealPlan} setMealPlan={setMealPlan}></MainContent>}
+            element={
+              <MainContent
+                recipeList={recipeList}
+                mealPlan={mealPlan}
+                setMealPlan={setMealPlan}
+              ></MainContent>
+            }
           />
           <Route
             path="recipe-list"
@@ -396,13 +402,20 @@ const App = () => {
             path="add-recipe"
             element={<AddRecipe addRecipe={addRecipe}></AddRecipe>}
           />
-                    <Route
+          <Route
             path="/edit-recipe/:id"
-            element={<EditRecipe recipeList={recipeList} setRecipeList={setRecipeList}></EditRecipe>}
+            element={
+              <EditRecipe
+                recipeList={recipeList}
+                setRecipeList={setRecipeList}
+              ></EditRecipe>
+            }
           />
           <Route
             path="mealplan"
-            element={<MealPlan mealPlan={mealPlan} recipeList={recipeList}></MealPlan>}
+            element={
+              <MealPlan mealPlan={mealPlan} recipeList={recipeList}></MealPlan>
+            }
           />
           <Route path="about" element={<About></About>} />
         </Routes>
