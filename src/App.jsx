@@ -342,7 +342,7 @@ const App = () => {
   //   }
   // }
   return (
-    <AppShell
+    <AppShell 
       header={{ height: 60 }}
       navbar={{
         width: 250,
@@ -351,9 +351,7 @@ const App = () => {
       }}
       padding="xl"
     >
-      <AppShell.Header>
-        {/* button to create multiple recipes */}
-        {/* <button onClick={handleCreate}>create recipes</button> */}
+      <AppShell.Header className="header"  >
         <Group h="150%">
           <Burger
             opened={mobileOpened}
@@ -369,7 +367,7 @@ const App = () => {
           />
         </Group>
         <Link to="/">
-          <Image src={logo} height={60} alt="logo" />
+          <Image src={logo} height={55} alt="logo" />
         </Link>{" "}
       </AppShell.Header>
       <AppShell.Navbar>

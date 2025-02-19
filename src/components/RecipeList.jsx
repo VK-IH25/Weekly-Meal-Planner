@@ -80,7 +80,7 @@ function RecipeList({ recipeList }) {
         mb="20px"
         onChange={(event) => setQuery(event.target.value)} 
       />
-      <SimpleGrid cols={3} spacing="lg" verticalSpacing="lg">
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }} spacing="lg" verticalSpacing="lg">
         {list}
       </SimpleGrid>
     </>

@@ -10,28 +10,35 @@ import {
 } from "@mantine/core";
 import VictorImage from "../assets/img/profile/victor.jpeg";
 import KamranImage from "../assets/img/profile/kamran.png";
+import logodark from "../assets/img/logo-dark.png"
 
-const devMembers = [
-  {
-    name: "Victor Abussafi",
-    image: VictorImage,
-    github: "https://github.com/abussafilx",
-    linkedin: "https://www.linkedin.com/in/victorabussafi/",
-  },
-  {
-    name: "Kamran Ali",
-    image: KamranImage,
-    github: "https://github.com/Kamran-frontend",
-    linkedin: "https://www.linkedin.com/in/kamranalifrmrbw/",
-  },
-];
+
 
 function About() {
+
+  const devMembers = [
+    {
+      name: "Victor Abussafi",
+      image: VictorImage,
+      github: "https://github.com/abussafilx",
+      linkedin: "https://www.linkedin.com/in/victorabussafi/",
+    },
+    {
+      name: "Kamran Ali",
+      image: KamranImage,
+      github: "https://github.com/Kamran-frontend",
+      linkedin: "https://www.linkedin.com/in/kamranalifrmrbw/",
+    },
+  ];
+
+
   return (
-    <Container className="about-container" size="md">
+    
+    <Container className="about-container" size="md" align="center">
       <Title order={1} align="center" mb="md">
         Weekly Meal Planner Project
       </Title>
+      <Image src={logodark} w={400} mt={30}></Image>
       <Text align="center" mb="xl">
         This React.js project was developed by{" "}
         <strong>{devMembers[0].name}</strong> and{" "}
