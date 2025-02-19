@@ -15,6 +15,8 @@ function EditRecipe(props) {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  
+
   const recipeObj = props.recipeList.find((e) => e.idMeal == id);
 
   const [strMeal, setStrMeal] = useState("");
@@ -25,6 +27,29 @@ function EditRecipe(props) {
   const [ingredients, setIngredients] = useState("");
   const [measures, setMeasures] = useState("");
 
+  const [recipeKey, setRecipeKey] = useState(null); // Use state to store recipeKey
+
+  useEffect(() => {
+    // Fetch recipe key when component mounts
+    const fetchRecipeKey = async () => {
+      try {
+        const response = await axios.get(
+          "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+        );
+
+        const data = response.data;
+        const key = Object.keys(data).find((key) => data[key].idMeal == id);
+
+        setRecipeKey(key); // Set the recipeKey state
+      } catch (error) {
+        console.error("Error fetching recipe:", error);
+      }
+    };
+    fetchRecipeKey();
+  }, [id]); 
+        
+  
+ 
   useEffect(() => {
     if (recipeObj) {
       setStrMeal(recipeObj.strMeal);
@@ -45,10 +70,11 @@ function EditRecipe(props) {
     }
   }, [recipeObj]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const updatedRecipe = {
+      idMeal: id,
       strMeal,
       strCategory,
       strArea,
@@ -73,24 +99,27 @@ function EditRecipe(props) {
       }
     });
 
-    axios
-      .put(
-        `https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals/${id}.json`,
-        updatedRecipe
-      )
-      .then(() => {
-        const updatedRecipeList = props.recipeList.map((recipe) =>
-          recipe.idMeal === id ? { ...recipe, ...updatedRecipe } : recipe
+    
+    if (recipeKey) {
+      try {
+        await axios.put(
+          `https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals/${recipeKey}.json`,
+          updatedRecipe
         );
-        props.setRecipeList(updatedRecipeList);
-
-        navigate(`/recipe/${id}`);
-      })
-      .catch((error) => {
+    
+        const response = await axios.get(
+          "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+        );
+    
+        props.setRecipeList(Object.values(response.data)); // Fix: Use `props.setRecipeList`
+    
+        navigate(`/recipe-list`);
+      } catch (error) {
         console.error("Error updating recipe:", error);
-      });
-  };
-
+      }
+    }
+  }
+      
   return (
     <Center>
       <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={800}>
