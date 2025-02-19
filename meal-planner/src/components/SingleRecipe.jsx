@@ -26,8 +26,7 @@ function SingleRecipe(props) {
     const response = await axios.get(
       "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
     );
-    const data = response.data;
-    const recipeKey = Object.keys(data).find(
+    const recipeKey = Object.keys(response.data).find(
       (key) => data[key].idMeal == id
     );
 
