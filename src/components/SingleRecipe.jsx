@@ -12,24 +12,20 @@ import {
   Divider,
 } from "@mantine/core";
 import axios from "axios";
-
 import { useParams, useNavigate } from "react-router-dom";
 
-function SingleRecipe(props) {
+function SingleRecipe({ recipeList, deleteRecipe }) {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const recipeObj = props.recipeList.find((e) => e.idMeal == id);
+  const recipeObj = recipeList.find((e) => e.idMeal == id);
 
   const handleDelete = async () => {
     const response = await axios.get(
       "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
     );
-
     const data = response.data;
     const recipeKey = Object.keys(data).find((key) => data[key].idMeal == id);
-
-    props.deleteRecipe(recipeKey);
+    deleteRecipe(recipeKey);
   };
 
   if (!recipeObj) {
@@ -42,11 +38,23 @@ function SingleRecipe(props) {
   }
 
   return (
-    <Container>
-      <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={800}>
-        <BackgroundImage src={recipeObj.strMealThumb} radius="sm" h={250}>
+    <Container size="md" px="xs">
+      <Card
+        shadow="sm"
+        padding="lg"
+        radius="md"
+        withBorder
+        mt="md"
+        w="100%"
+        sx={{ maxWidth: 800 }}
+      >
+        <BackgroundImage
+          src={recipeObj.strMealThumb}
+          radius="sm"
+          h={{ base: 180, sm: 250 }}
+        >
           <Center p="md">
-            <Text c="white" align="center">
+            <Text c="white" align="center" size={{ base: "sm", sm: "md" }}>
               {recipeObj.strMeal} - A delicious {recipeObj.strCategory} dish
               from {recipeObj.strArea}
             </Text>
@@ -54,7 +62,7 @@ function SingleRecipe(props) {
         </BackgroundImage>
 
         <Group mt="15px" mb="10px" position="apart">
-          <Title>{recipeObj.strMeal}</Title>
+          <Title order={2}>{recipeObj.strMeal}</Title>
           <Group>
             <Badge color="pink">{recipeObj.strArea}</Badge>
             <Badge color="pink">{recipeObj.strCategory}</Badge>
@@ -71,7 +79,7 @@ function SingleRecipe(props) {
             const ingredient = recipeObj[`strIngredient${index + 1}`];
             const measure = recipeObj[`strMeasure${index + 1}`];
             return ingredient && measure ? (
-              <Grid.Col span={6} key={index}>
+              <Grid.Col span={{ base: 12, sm: 6 }} key={index}>
                 <Text tt="capitalize">
                   {ingredient} - {measure}
                 </Text>
@@ -85,20 +93,23 @@ function SingleRecipe(props) {
         </Title>
         <Text>{recipeObj.strInstructions}</Text>
 
-        <Button bg={"red"} mt="20px" onClick={() => handleDelete()}>
-          Delete
-        </Button>
-        <Button
+        <Group
           mt="20px"
-          variant="outline"
-          onClick={() => navigate(`/edit-recipe/${id}`)}
+          position="center"
+          spacing="md"
+          style={{ margin: "auto" }}
         >
-          Edit Recipe
-        </Button>
-
-        <Button mt={"20px"} onClick={() => navigate("/recipe-list")}>
-          Go Back
-        </Button>
+          <Button color="red" onClick={handleDelete}>
+            Delete
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => navigate(`/edit-recipe/${id}`)}
+          >
+            Edit Recipe
+          </Button>
+          <Button onClick={() => navigate("/recipe-list")}>Go Back</Button>
+        </Group>
       </Card>
     </Container>
   );
