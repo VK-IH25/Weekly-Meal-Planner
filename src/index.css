@@ -46,6 +46,10 @@ body {
   color: var(--black);
 }
 
+.special-page-bg {
+  background-color: var(--platinum);
+}
+
 /* Typography */
 h1 {
   font-size: 3.2em;

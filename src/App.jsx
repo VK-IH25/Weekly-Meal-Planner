@@ -9,7 +9,7 @@ import {
   Image,
   AppShellFooter,
 } from "@mantine/core";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { useDisclosure } from "@mantine/hooks";
@@ -28,6 +28,7 @@ import EditRecipe from "./components/EditRecipe";
 import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
 import MealPlan from "./pages/MealPlan";
+import Board from './components/Board'
 
 
 
@@ -273,6 +274,17 @@ const App = () => {
   const [mealPlan, setMealPlan] = useState([]);
   const navigate = useNavigate();
 
+  //bg color for homepage
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      document.body.classList.add("special-page-bg");
+    } else {
+      document.body.classList.remove("special-page-bg");
+    }
+  }, [location.pathname]);
+
   useEffect(() => {
     axios
       .get(
@@ -383,7 +395,7 @@ const App = () => {
       <AppShell.Main>
         <Routes>
           <Route
-            path="/"
+            path="planner"
             element={
               <MainContent
                 recipeList={recipeList}
@@ -422,6 +434,12 @@ const App = () => {
             path="mealplan"
             element={
               <MealPlan mealPlan={mealPlan} recipeList={recipeList}></MealPlan>
+            }
+          />
+           <Route
+            path="/"
+            element={
+              <Board></Board>
             }
           />
           <Route path="about" element={<About></About>} />
