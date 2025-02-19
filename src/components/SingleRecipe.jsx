@@ -19,21 +19,23 @@ function SingleRecipe(props) {
   const { id } = useParams();
   const navigate = useNavigate();
 
-
   const recipeObj = props.recipeList.find((e) => e.idMeal == id);
 
   const handleDelete = async () => {
     const response = await axios.get(
       "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
     );
+<<<<<<< HEAD:src/components/SingleRecipe.jsx
     const recipeKey = Object.keys(response.data).find(
       (key) => data[key].idMeal == id
     );
+=======
+    const data = response.data;
+    const recipeKey = Object.keys(data).find((key) => data[key].idMeal == id);
+>>>>>>> 05177ec07dd1a679b4b43e916ac3c4b727f5570a:meal-planner/src/components/SingleRecipe.jsx
 
-    props.deleteRecipe(recipeKey)
+    props.deleteRecipe(recipeKey);
   };
-
-
 
   if (!recipeObj) {
     return (
@@ -88,9 +90,18 @@ function SingleRecipe(props) {
         </Title>
         <Text>{recipeObj.strInstructions}</Text>
 
-        <Button bg={"red"} mt="20px" onClick={() => handleDelete()}>Delete</Button>
+        <Button bg={"red"} mt="20px" onClick={() => handleDelete()}>
+          Delete
+        </Button>
+        <Button
+          mt="20px"
+          variant="outline"
+          onClick={() => navigate(`/edit-recipe/${id}`)}
+        >
+          Edit Recipe
+        </Button>
 
-        <Button mt={"20px"} onClick={() => navigate(-1)}>
+        <Button mt={"20px"} onClick={() => navigate("/recipe-list")}>
           Go Back
         </Button>
       </Card>

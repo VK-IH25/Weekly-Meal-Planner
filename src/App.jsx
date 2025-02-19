@@ -23,6 +23,7 @@ import RecipeList from "./components/RecipeList";
 import SingleRecipe from "./components/SingleRecipe";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
+import EditRecipe from "./components/EditRecipe";
 
 import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
@@ -304,30 +305,25 @@ const App = () => {
   };
 
   const deleteRecipe = (key) => {
-    axios.delete(
-      `https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals/${key}.json`
-    )
-    .then(() =>
-      axios.get(
-        "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
-      ))
-    .then((r) => {
-      setRecipeList(Object.values(r.data));
-    })
-    .then(() => {
-      navigate("/recipe-list"); // Navigate after the state has been updated
-    })
-    .catch((error) => {
-      console.error("Error deleting recipe:", error);
-    });
-};
- 
-  
- 
-
-
-
-
+    axios
+      .delete(
+        `https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals/${key}.json`
+      )
+      .then(() =>
+        axios.get(
+          "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+        )
+      )
+      .then((r) => {
+        setRecipeList(Object.values(r.data));
+      })
+      .then(() => {
+        navigate("/recipe-list"); // Navigate after the state has been updated
+      })
+      .catch((error) => {
+        console.error("Error deleting recipe:", error);
+      });
+  };
 
   //SCRIPT TO ADD MULTIPLE ITEMS TO DATABASE
   //WORKS BY CLICKING CREATE RECIPE BUTTON
@@ -391,7 +387,12 @@ const App = () => {
           />
           <Route
             path="recipe/:id"
-            element={<SingleRecipe recipeList={recipeList} deleteRecipe={deleteRecipe}></SingleRecipe>}
+            element={
+              <SingleRecipe
+                recipeList={recipeList}
+                deleteRecipe={deleteRecipe}
+              ></SingleRecipe>
+            }
           />
           <Route
             path="add-recipe"
