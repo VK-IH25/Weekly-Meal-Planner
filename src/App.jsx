@@ -29,11 +29,14 @@ import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
 import MealPlan from "./pages/MealPlan";
 import Board from './components/Board'
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
+import AuthDetails from "./components/auth/AuthDetails";
 
 
 
 const App = () => {
-  
+
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(false);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
 
@@ -41,17 +44,17 @@ const App = () => {
   const [mealPlan, setMealPlan] = useState([]);
   const navigate = useNavigate();
 
-//local storage for meal plans
+  //local storage for meal plans
 
-useEffect(() => {
-  try {
-    const history = JSON.parse(localStorage.getItem('mealPlan')) || [];
-    setMealPlan(history);
-  } catch (error) {
-    console.error("Erro ao carregar mealPlan:", error);
-    setMealPlan([]);
-  }
-}, []);
+  useEffect(() => {
+    try {
+      const history = JSON.parse(localStorage.getItem('mealPlan')) || [];
+      setMealPlan(history);
+    } catch (error) {
+      console.error("Erro ao carregar mealPlan:", error);
+      setMealPlan([]);
+    }
+  }, []);
 
 
 
@@ -149,7 +152,7 @@ useEffect(() => {
       padding="0"
     >
       <AppShell.Header className="header">
-        <Group h="150%">
+        <Group h="300%">
           <Burger
             lineSize={3}
             opened={mobileOpened}
@@ -166,10 +169,13 @@ useEffect(() => {
             size="sm"
             className="burger"
           />
-        </Group>
-        <Link to="/">
+                  <Link to="/">
           <Image src={logo} height={55} alt="logo" />
+
         </Link>
+        </Group>
+
+        <AuthDetails></AuthDetails>
       </AppShell.Header>
       <AppShell.Navbar>
         <Sidebar />
@@ -218,13 +224,15 @@ useEffect(() => {
               <MealPlan mealPlan={mealPlan} recipeList={recipeList}></MealPlan>
             }
           />
-           <Route
+          <Route
             path="/"
             element={
               <Board></Board>
             }
           />
           <Route path="about" element={<About></About>} />
+          <Route path="signin" element={<SignIn></SignIn>} />
+          <Route path="signup" element={<SignUp />} />
         </Routes>
       </AppShell.Main>
 
