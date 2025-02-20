@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 
 
 function RecipeList({ recipeList }) {
-  const [query, setQuery] = useState(""); 
+  const [query, setQuery] = useState("");
 
 
 
@@ -74,20 +74,20 @@ function RecipeList({ recipeList }) {
 
   return (
     <>
-      
+
       <Input
         placeholder="Search"
         value={query}
         mb="20px"
         rightSection={<FaSearch />}
-        onChange={(event) => setQuery(event.target.value)} 
+        onChange={(event) => setQuery(event.target.value)}
       />
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }} spacing="lg" verticalSpacing="lg">
         {list}
       </SimpleGrid>
     </>
   );
-  
+
 }
 
 export default RecipeList;

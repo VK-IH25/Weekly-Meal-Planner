@@ -1,4 +1,5 @@
 import { Card, Image, Text, Badge, Button, Group, Title } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 function RecipeCards(props) {
   const handleDragStart = (e) => {
@@ -27,9 +28,11 @@ function RecipeCards(props) {
       >
         <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={""}>
           <Group justify="space-between">
+          
             <Text fw={500} size="xs">
               {e.strMeal}
             </Text>
+            
           </Group>
         </Card>
       </div>
