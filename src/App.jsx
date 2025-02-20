@@ -363,7 +363,7 @@ const App = () => {
         breakpoint: "sm",
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
-      padding="xl"
+      padding="0"
     >
       <AppShell.Header className="header">
         <Group h="150%">
