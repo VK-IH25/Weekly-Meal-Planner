@@ -13,6 +13,7 @@ import "../assets/styles/MainContent.css";
 import RecipeCards from "./RecipeCards";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router";
 
 const MainContent = (props) => {
   const daysOfWeek = [
@@ -151,6 +152,7 @@ const MainContent = (props) => {
                                 meal.day === day && meal.mealTime === mealTime
                             ) // Filter meals for the current cell
                             .map((meal) => (
+                              
                               <div
                                 key={meal.recipeId}
                                 style={{
@@ -158,8 +160,9 @@ const MainContent = (props) => {
                                   alignItems: "center",
                                   marginBottom: "5px",
                                 }}
-                              >
+                              ><Link to={`/recipe/${meal.recipeId}`}>
                                 {getRecipeName(meal.recipeId)}
+                                </Link>
                                 <CloseButton
                                   size="xs"
                                   style={{ marginLeft: "5px" }}
