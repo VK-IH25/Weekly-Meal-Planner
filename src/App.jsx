@@ -180,7 +180,7 @@ const App = () => {
         <AuthDetails></AuthDetails>
       </AppShell.Header>
       <AppShell.Navbar>
-        <Sidebar />
+        <Sidebar toggleDesktop={toggleDesktop} toggleDesktop={toggleDesktop}/>
       </AppShell.Navbar>
       <AppShell.Main>
         <Routes>

@@ -3,33 +3,42 @@ import { Link } from "react-router-dom";
 import { FaTh, FaShoppingCart, FaInfoCircle, FaHome } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import "../assets/styles/Sidebar.css";
+import { FaCalendarAlt } from "react-icons/fa";
 
-const Sidebar = () => {
+
+const Sidebar = (props) => {
+
+
   return (
     <nav className="sidebar">
       <ul>
         <li>
-          <Link to="/">
+          <Link to="/" onClick={ props.toggleDesktop}>
             <FaHome /> Home
           </Link>
         </li>
         <li>
-          <Link to="/recipe-list">
+          <Link to="/planner" onClick={ props.toggleDesktop}>
+          <FaCalendarAlt />           Weekly Planner
+          </Link>
+        </li>
+        <li>
+          <Link to="/recipe-list" onClick={ props.toggleDesktop}>
             <FaTh /> All recipes
           </Link>
         </li>
         <li>
-          <Link to="/add-recipe">
+          <Link to="/add-recipe" onClick={ props.toggleDesktop}>
             <IoMdAddCircle /> Add Recipe
           </Link>
         </li>
         <li>
-          <Link to="/mealplan">
+          <Link to="/mealplan" onClick={ props.toggleDesktop}>
             <FaShoppingCart /> Groceries List
           </Link>
         </li>
         <li>
-          <Link to="/about">
+          <Link to="/about" onClick={ props.toggleDesktop}> 
             <FaInfoCircle /> About
           </Link>
         </li>

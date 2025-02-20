@@ -15,7 +15,7 @@ import "../assets/styles/MainContent.css";
 import RecipeCards from "./RecipeCards";
 import { useState } from "react";
 import { FaSearch,   } from "react-icons/fa";
-import { IoReload } from "react-icons/io5";
+import { TbReload } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const MainContent = (props) => {
@@ -125,7 +125,7 @@ const MainContent = (props) => {
             <Title order={3} c={"var(--oxford-blue)"}>
               Weekly Meal Planner
             </Title>
-            <Button size="compact-md" variant="outline" color="white" onClick={clearBoard}><IoReload /></Button>
+            <Button size="compact-md" variant="outline" color={"var(--oxford-blue)"} onClick={clearBoard}><TbReload /></Button>
             </Flex>
             <ScrollArea>
               <Table
