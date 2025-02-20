@@ -1,0 +1,40 @@
+    MVP:
+ OK   - Weekly calendar (very similar to the kanban board with D&D cards with recipes) - First genereic monday to sunday 
+ OK   - List of recipes (API - CRUD) (portions and quantities) - Look for a good recipe API to use as base
+    - List of ingredients (API - CRUD)
+    - Shopping List (cross selected recipes x ingredients to generate a shopping list)
+ OK   - Mantine CSS Framework (or MUI to be decided)
+
+    1.1
+    - Inventory List
+    - Users / save recipes and favorites
+    - Share functionality (share the list or the weekly plan or the recipes)
+    - Actual calendar with dates and the hability to have historic data (maybe give the choice to plan weekly, bi-weekly or monthly)
+
+    1.2
+    - AI assistant (chatbot)
+    - shopping suggestions (suggest nearby markets or websites)
+
+
+    database: https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/
+
+
+
+    Monday
+
+ OK   - Navigation (navbar, sidebar, board)
+ OK   - APIs
+ OK   - Recipes List page
+ OK  - Single recipe page
+ OK  - Add recipe page
+ OK   - Edit recipe page
+ OK   - Main Page with the table
+ OK   - Basic layout
+
+Color Pallete
+
+$black: #000000ff;
+$oxford-blue: #14213dff;
+$orange-web: #fca311ff;
+$platinum: #e5e5e5ff;
+$white: #ffffffff;

@@ -1,12 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  FaCalendarAlt,
-  FaTh,
-  FaShoppingCart,
-  FaClipboardList,
-  FaInfoCircle,
-} from "react-icons/fa";
+import { FaTh, FaShoppingCart, FaInfoCircle, FaHome } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import "../assets/styles/Sidebar.css";
 
@@ -16,7 +10,7 @@ const Sidebar = () => {
       <ul>
         <li>
           <Link to="/">
-            <FaCalendarAlt /> Plan
+            <FaHome /> Home
           </Link>
         </li>
         <li>
@@ -25,18 +19,15 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <FaShoppingCart /> Groceries List
-        </li>
-        <Link to="/add-recipe">
-          <li>
+          <Link to="/add-recipe">
             <IoMdAddCircle /> Add Recipe
-          </li>
-        </Link>
-        <Link to="/mealplan">
-          <li>
-            <FaClipboardList /> Groceries Management
-          </li>
-        </Link>
+          </Link>
+        </li>
+        <li>
+          <Link to="/mealplan">
+            <FaShoppingCart /> Groceries List
+          </Link>
+        </li>
         <li>
           <Link to="/about">
             <FaInfoCircle /> About

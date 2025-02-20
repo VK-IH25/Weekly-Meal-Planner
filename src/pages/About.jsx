@@ -2,20 +2,18 @@ import React from "react";
 import {
   Container,
   Title,
+  Image,
   Text,
   Grid,
   Card,
-  Image,
   Anchor,
+  Center,
 } from "@mantine/core";
 import VictorImage from "../assets/img/profile/victor.jpeg";
 import KamranImage from "../assets/img/profile/kamran.png";
-import logodark from "../assets/img/logo-dark.png"
-
-
+import logodark from "../assets/img/logo-dark.png";
 
 function About() {
-
   const devMembers = [
     {
       name: "Victor Abussafi",
@@ -31,41 +29,45 @@ function About() {
     },
   ];
 
-
   return (
-    
-    <Container className="about-container" size="md" align="center">
-      <Title order={1} align="center" mb="md">
-        Weekly Meal Planner Project
-      </Title>
-      <Image src={logodark} w={400} mt={30}></Image>
-      <Text align="center" mb="xl">
-        This React.js project was developed by{" "}
-        <strong>{devMembers[0].name}</strong> and{" "}
-        <strong>{devMembers[1].name}</strong> as part of their learning journey
-        at Ironhack.
+    <Container size="md" my="xl">
+      <Center>
+        <Title order={1} mb="md">
+          Weekly Meal Planner Project
+        </Title>
+      </Center>
+
+      <Center>
+        <Image src={logodark} w={250} mt="md" />
+      </Center>
+
+      <Text align="center" mt="md" mb="xl">
+        <i>
+          This React.js project was developed by{" "}
+          <strong>{devMembers[0].name}</strong> and{" "}
+          <strong>{devMembers[1].name}</strong> as part of their learning
+          journey at Ironhack.
+        </i>
       </Text>
 
       <Title order={2} align="center" mb="lg">
         Meet the Devs
       </Title>
-      <Grid gutter="xl">
+
+      <Grid gutter="xl" justify="center">
         {devMembers.map((member, index) => (
-          <Grid.Col span={6} key={index}>
+          <Grid.Col span={{ base: 12, sm: 4 }} key={index}>
             <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Card.Section>
+              <Center>
                 <Image
                   src={member.image}
                   alt={member.name}
-                  style={{
-                    width: 120,
-                    height: 120,
-                    borderRadius: "50%",
-                  }}
-                  mx="auto"
+                  width={120}
+                  height={120}
+                  style={{ borderRadius: "50%" }}
                   mt="lg"
                 />
-              </Card.Section>
+              </Center>
               <Text align="center" weight={500} mt="md">
                 {member.name}
               </Text>

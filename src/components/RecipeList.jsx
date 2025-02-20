@@ -1,23 +1,27 @@
-import { SimpleGrid, Card, Overlay, Text, Group, Title, Autocomplete, Input } from "@mantine/core";
+import {
+  Container,
+  SimpleGrid,
+  Card,
+  Overlay,
+  Group,
+  Title,
+  Input,
+} from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-
 function RecipeList({ recipeList }) {
   const [query, setQuery] = useState("");
 
-
-
   //search
-
   const filteredList = recipeList.filter((recipe) =>
     Object.values(recipe).some(
       (value) =>
-        typeof value === "string" && value.toLowerCase().includes(query.toLowerCase())
+        typeof value === "string" &&
+        value.toLowerCase().includes(query.toLowerCase())
     )
   );
-
 
   const list = filteredList.map((e) => {
     return (
@@ -73,8 +77,7 @@ function RecipeList({ recipeList }) {
   });
 
   return (
-    <>
-
+    <Container size="xxl" py="xl">
       <Input
         placeholder="Search"
         value={query}
@@ -82,12 +85,15 @@ function RecipeList({ recipeList }) {
         rightSection={<FaSearch />}
         onChange={(event) => setQuery(event.target.value)}
       />
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }} spacing="lg" verticalSpacing="lg">
+      <SimpleGrid
+        cols={{ base: 1, sm: 2, lg: 5 }}
+        spacing="lg"
+        verticalSpacing="lg"
+      >
         {list}
       </SimpleGrid>
-    </>
+    </Container>
   );
-
 }
 
 export default RecipeList;

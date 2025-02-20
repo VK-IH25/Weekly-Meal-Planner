@@ -1,14 +1,7 @@
-import React from "react";
 import "@mantine/core/styles.css";
+import React from "react";
 import "./App.css";
-import {
-  AppShell,
-  Burger,
-  Group,
-  Skeleton,
-  Image,
-  AppShellFooter,
-} from "@mantine/core";
+import { AppShell, Burger, Group, Image } from "@mantine/core";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -59,6 +52,15 @@ const App = () => {
 
 
 
+  useEffect(() => {
+    try {
+      const history = JSON.parse(localStorage.getItem("mealPlan")) || [];
+      setMealPlan(history);
+    } catch (error) {
+      console.error("Erro ao carregar mealPlan:", error);
+      setMealPlan([]);
+    }
+  }, []);
 
   //bg color for homepage
   const location = useLocation();

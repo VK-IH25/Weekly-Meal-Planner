@@ -6,8 +6,9 @@ import {
   Select,
   Title,
   Button,
-  Center,
+  Container,
   Card,
+  Stack,
 } from "@mantine/core";
 
 function AddRecipe(props) {
@@ -55,13 +56,13 @@ function AddRecipe(props) {
   };
 
   return (
-    <>
-      <Center>
-        <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={800}>
-          <Title order={3} mb="20px">
-            Add new recipe
-          </Title>
-          <form onSubmit={handleSubmit}>
+    <Container size="md" my="xl">
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <Title order={3} mb="md" align="center">
+          Add New Recipe
+        </Title>
+        <form onSubmit={handleSubmit}>
+          <Stack>
             <TextInput
               label="Recipe Title"
               placeholder="i.e. Margherita Pizza"
@@ -100,7 +101,7 @@ function AddRecipe(props) {
               }
             />
             <TextInput
-              label="Image"
+              label="Image URL"
               description="Upload a good photo of your dish"
               placeholder="https://www.photos.com/pizza.png"
               value={strMealThumb}
@@ -112,20 +113,17 @@ function AddRecipe(props) {
               value={ingredients}
               onChange={(event) => setIngredients(event.currentTarget.value)}
             />
-
             <TextInput
               label="Measures (comma separated)"
               placeholder="i.e. 1 cup, 2 tomatoes, 1 dough ball"
               value={measures}
               onChange={(event) => setMeasures(event.currentTarget.value)}
             />
-            <Button type="submit" mt="md">
-              Add Recipe
-            </Button>
-          </form>
-        </Card>
-      </Center>
-    </>
+            <Button type="submit">Add Recipe</Button>
+          </Stack>
+        </form>
+      </Card>
+    </Container>
   );
 }
 
