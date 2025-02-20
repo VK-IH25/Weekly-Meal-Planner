@@ -9,6 +9,8 @@ import {
   Container,
   Card,
   Stack,
+  Group,
+  Center,
 } from "@mantine/core";
 
 function AddRecipe(props) {
@@ -119,7 +121,20 @@ function AddRecipe(props) {
               value={measures}
               onChange={(event) => setMeasures(event.currentTarget.value)}
             />
-            <Button type="submit">Add Recipe</Button>
+            <Center>
+              <Group>
+                <Button variant="filled" color="#3d8d7a" type="submit">
+                  Add Recipe
+                </Button>
+                <Button
+                  variant="light"
+                  color="red"
+                  onClick={() => navigate("/recipe-list")}
+                >
+                  Cancel
+                </Button>
+              </Group>
+            </Center>
           </Stack>
         </form>
       </Card>

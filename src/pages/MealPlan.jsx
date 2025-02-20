@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { Table, Checkbox, Container, Title, Input } from "@mantine/core";
+import {
+  Table,
+  Checkbox,
+  Container,
+  Title,
+  Input,
+  Pagination,
+  Center,
+} from "@mantine/core";
 
 function MealPlan(props) {
   if (!props.mealPlan.length) {
@@ -65,6 +73,15 @@ function MealPlan(props) {
       ingredient.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+  // Pagination
+  const [activePage, setActivePage] = useState(1);
+  const pageSize = 15;
+  const startIndex = (activePage - 1) * pageSize;
+  const paginatedList = filteredShoppingList.slice(
+    startIndex,
+    startIndex + pageSize
+  );
+
   return (
     <Container size={"xl"} my="xl">
       <Title order={3}>Shopping List</Title>
@@ -83,7 +100,7 @@ function MealPlan(props) {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {filteredShoppingList.map(([ingredient, measures], index) => (
+          {paginatedList.map(([ingredient, measures], index) => (
             <Table.Tr
               key={index}
               bg={
@@ -109,6 +126,16 @@ function MealPlan(props) {
           ))}
         </Table.Tbody>
       </Table>
+      <Center>
+        <Pagination
+          total={Math.ceil(filteredShoppingList.length / pageSize)}
+          value={activePage}
+          onChange={setActivePage}
+          mt="xl"
+          size="sm"
+          color="#3d8d7a"
+        />
+      </Center>
     </Container>
   );
 }

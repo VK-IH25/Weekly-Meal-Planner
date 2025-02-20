@@ -46,7 +46,17 @@ function SingleRecipe({ recipeList, deleteRecipe }) {
           h={{ base: 180, sm: 250 }}
         >
           <Center p="md">
-            <Text c="white" align="center" size={{ base: "sm", sm: "md" }}>
+            <Text
+              c="white"
+              align="center"
+              size={{ base: "sm", sm: "md" }}
+              style={{
+                textShadow: "1px 1px 4px rgba(0, 0, 0, 0.7)",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                padding: "5px 10px",
+                borderRadius: "5px",
+              }}
+            >
               {recipeObj.strMeal} - A delicious {recipeObj.strCategory} dish
               from {recipeObj.strArea}
             </Text>

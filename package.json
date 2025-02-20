@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@firebase/auth": "^1.9.0",
     "@mantine/core": "^7.16.3",
     "@mantine/dates": "^7.16.3",
     "@mantine/dropzone": "^7.16.3",

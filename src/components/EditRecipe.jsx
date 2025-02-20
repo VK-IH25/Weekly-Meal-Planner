@@ -9,6 +9,8 @@ import {
   Card,
   Container,
   Stack,
+  Group,
+  Center,
 } from "@mantine/core";
 import axios from "axios";
 
@@ -180,7 +182,20 @@ function EditRecipe(props) {
               value={measures}
               onChange={(event) => setMeasures(event.currentTarget.value)}
             />
-            <Button type="submit">Save Changes</Button>
+            <Center>
+              <Group>
+                <Button variant="filled" color="#3d8d7a" type="submit">
+                  Update Recipe
+                </Button>
+                <Button
+                  variant="light"
+                  color="red"
+                  onClick={() => navigate(`/recipe/${id}`)}
+                >
+                  Cancel
+                </Button>
+              </Group>
+            </Center>
           </Stack>
         </form>
       </Card>
