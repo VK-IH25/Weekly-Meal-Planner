@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Table, Checkbox, Container, Title } from "@mantine/core";
+import { Table, Checkbox, Container, Title, Input } from "@mantine/core";
 
 function MealPlan(props) {
   if (!props.mealPlan.length) {
     return (
       <Container mt="md">
         <Title order={3}>
-          No meals available. Please add a meal to view details.
+          Your meal plan is empty. Add some recipes to get started!
         </Title>
       </Container>
     );
@@ -14,11 +14,12 @@ function MealPlan(props) {
 
   let shoppingList = {};
 
+  // creating shopping list
   props.mealPlan.forEach((e) => {
     const recipeDetails = props.recipeList.find((r) => r.idMeal === e.recipeId);
     if (recipeDetails) {
       [...Array(20).keys()].forEach((index) => {
-        const ingredient = recipeDetails[`strIngredient${index + 1}`];
+        const ingredient = recipeDetails[`strIngredient${index + 1}`].toCapit;
         const measure = recipeDetails[`strMeasure${index + 1}`];
         if (ingredient && measure) {
           if (shoppingList[ingredient]) {
@@ -55,9 +56,24 @@ function MealPlan(props) {
     });
   };
 
+  // search functionality
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredShoppingList = Object.entries(shoppingList)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .filter(([ingredient]) =>
+      ingredient.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
   return (
     <Container size={"xl"} my="xl">
       <Title order={3}>Shopping List</Title>
+      <Input
+        placeholder="Search ingredients..."
+        value={searchQuery}
+        onChange={(event) => setSearchQuery(event.target.value)}
+        my="md"
+      />
       <Table my={15}>
         <Table.Thead>
           <Table.Tr>
@@ -67,7 +83,7 @@ function MealPlan(props) {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {Object.entries(shoppingList).map(([ingredient, measures], index) => (
+          {filteredShoppingList.map(([ingredient, measures], index) => (
             <Table.Tr
               key={index}
               bg={
