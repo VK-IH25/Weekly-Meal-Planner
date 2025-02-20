@@ -8,6 +8,8 @@ import {
   Container,
   Grid,
   Paper,
+  Button,
+  Flex,
 } from "@mantine/core";
 import "../assets/styles/MainContent.css";
 import RecipeCards from "./RecipeCards";
@@ -46,6 +48,10 @@ const MainContent = (props) => {
       )
     );
   };
+
+  const clearBoard = () => {
+    props.setMealPlan([])
+  }
 
   //Drag and Drop
 
@@ -114,9 +120,12 @@ const MainContent = (props) => {
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 10 }}>
           <Paper p="md" h="100%" bg={"var(--platinum)"}>
+            <Flex justify="space-between">
             <Title order={3} c={"var(--oxford-blue)"}>
               Weekly Meal Planner
             </Title>
+            <Button size="compact-md" variant="outline" color="white" onClick={clearBoard}>Clear Planner</Button>
+            </Flex>
             <ScrollArea>
               <Table
                 striped
