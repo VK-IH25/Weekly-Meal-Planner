@@ -13,7 +13,7 @@ import "../assets/styles/MainContent.css";
 import RecipeCards from "./RecipeCards";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const MainContent = (props) => {
   const daysOfWeek = [
@@ -53,6 +53,11 @@ const MainContent = (props) => {
     e.preventDefault();
   };
 
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("text", e.target.id);
+    console.log(e)
+  };
+
   const handleDrop = (ev, day, mealTime) => {
     ev.preventDefault();
     const recipeId = ev.dataTransfer.getData("text");
@@ -63,7 +68,7 @@ const MainContent = (props) => {
       return updatedMealPlan;
     });
 
-    setDragging(false);
+    
   };
 
   //search bar
@@ -148,13 +153,16 @@ const MainContent = (props) => {
                             .map((meal) => (
                               <div
                                 key={meal.recipeId}
+                                id={meal.recipeId}
+                                draggable="true"
+                                onDragStart={handleDragStart}
                                 style={{
                                   display: "flex",
                                   alignItems: "center",
                                   marginBottom: "5px",
                                 }}
                               >
-                                <Link to={`/recipe/${meal.recipeId}`}>
+                                <Link id={meal.recipeId} to={`/recipe/${meal.recipeId}`}>
                                   {getRecipeName(meal.recipeId)}
                                 </Link>
                                 <CloseButton
