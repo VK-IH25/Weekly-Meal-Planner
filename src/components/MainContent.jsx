@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   Title,
@@ -33,6 +33,8 @@ const MainContent = (props) => {
     );
   };
 
+ 
+
   // Function to remove a specific recipe from meal plan
   const clearRecipe = (day, mealTime, recipeId) => {
     props.setMealPlan((prev) =>
@@ -48,31 +50,27 @@ const MainContent = (props) => {
   };
 
   //Drag and Drop
-  const [dragging, setDragging] = useState(false);
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-  };
 
-  const handleDragEnter = (e) => {
+  const preventDefaultBehavior = (e) => {
     e.preventDefault();
-    setDragging(true);
   };
 
   const handleDrop = (ev, day, mealTime) => {
     ev.preventDefault();
     const recipeId = ev.dataTransfer.getData("text");
 
-    props.setMealPlan((prev) => [
-      ...prev,
-      { day, mealTime, recipeId }, // Add a new meal entry as an object
-    ]);
+    props.setMealPlan((prev) => {
+      const updatedMealPlan = [...prev, { day, mealTime, recipeId }];
+      localStorage.setItem('mealPlan', JSON.stringify(updatedMealPlan)); // Atualiza localStorage aqui
+      return updatedMealPlan;
+    });
+
 
     setDragging(false);
   };
+
+
 
   //search bar
   const [query, setQuery] = useState("");
@@ -94,9 +92,9 @@ const MainContent = (props) => {
               h={500}
               id="origin"
               onDrop={handleDrop}
-              onDragLeave={handleDragLeave}
-              onDragOver={handleDragOver}
-              onDragEnter={handleDragEnter}
+              onDragLeave={preventDefaultBehavior}
+              onDragOver={preventDefaultBehavior}
+              onDragEnter={preventDefaultBehavior}
               bg={"var(--oxford-blue)"}
               style={{
                 border: "1px solid gray",
@@ -142,9 +140,9 @@ const MainContent = (props) => {
                           key={day}
                           id={`${day}${mealTime}`}
                           onDrop={(ev) => handleDrop(ev, day, mealTime)}
-                          onDragLeave={handleDragLeave}
-                          onDragOver={handleDragOver}
-                          onDragEnter={handleDragEnter}
+                          onDragLeave={preventDefaultBehavior}
+                          onDragOver={preventDefaultBehavior}
+                          onDragEnter={preventDefaultBehavior}
                         >
                           {props.mealPlan
                             .filter(
