@@ -7,15 +7,14 @@ import {
   Title,
   Button,
   Card,
-  Center,
+  Container,
+  Stack,
 } from "@mantine/core";
 import axios from "axios";
 
 function EditRecipe(props) {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  
 
   const recipeObj = props.recipeList.find((e) => e.idMeal == id);
 
@@ -46,10 +45,8 @@ function EditRecipe(props) {
       }
     };
     fetchRecipeKey();
-  }, [id]); 
-        
-  
- 
+  }, [id]);
+
   useEffect(() => {
     if (recipeObj) {
       setStrMeal(recipeObj.strMeal);
@@ -99,94 +96,95 @@ function EditRecipe(props) {
       }
     });
 
-    
     if (recipeKey) {
       try {
         await axios.put(
           `https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals/${recipeKey}.json`,
           updatedRecipe
         );
-    
+
         const response = await axios.get(
           "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
         );
-    
+
         props.setRecipeList(Object.values(response.data)); // Fix: Use `props.setRecipeList`
-    
+
         navigate(`/recipe-list`);
       } catch (error) {
         console.error("Error updating recipe:", error);
       }
     }
-  }
-      
+  };
+
   return (
-    <Center>
-      <Card shadow="sm" padding="lg" radius="md" withBorder mt="md" w={800}>
-        <Title order={3} mb="20px">
+    <Container size="md" my="xl">
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <Title order={3} mb="md" align="center">
           Edit Recipe
         </Title>
         <form onSubmit={handleSubmit}>
-          <TextInput
-            label="Recipe Title"
-            placeholder="i.e. Margherita Pizza"
-            value={strMeal}
-            onChange={(event) => setStrMeal(event.currentTarget.value)}
-          />
-          <Select
-            label="Category"
-            placeholder="Pick value"
-            data={[
-              "Beef",
-              "Chicken",
-              "Dessert",
-              "Miscellaneous",
-              "Pork",
-              "Pasta",
-              "Starter",
-              "Vegetarian",
-              "Vegan",
-            ]}
-            value={strCategory}
-            onChange={(value) => setStrCategory(value)}
-          />
-          <TextInput
-            label="Cuisine"
-            placeholder="i.e. Italian"
-            value={strArea}
-            onChange={(event) => setStrArea(event.currentTarget.value)}
-          />
-          <Textarea
-            label="Instructions"
-            placeholder="How to make this dish?"
-            value={strInstructions}
-            onChange={(event) => setStrInstructions(event.currentTarget.value)}
-          />
-          <TextInput
-            label="Image"
-            description="Upload a good photo of your dish"
-            placeholder="https://www.photos.com/pizza.png"
-            value={strMealThumb}
-            onChange={(event) => setStrMealThumb(event.currentTarget.value)}
-          />
-          <TextInput
-            label="Ingredients (comma separated)"
-            placeholder="i.e. Cheese, Tomato, Dough"
-            value={ingredients}
-            onChange={(event) => setIngredients(event.currentTarget.value)}
-          />
-          <TextInput
-            label="Measures (comma separated)"
-            placeholder="i.e. 1 cup, 2 tomatoes, 1 dough ball"
-            value={measures}
-            onChange={(event) => setMeasures(event.currentTarget.value)}
-          />
-          <Button type="submit" mt="md">
-            Save Changes
-          </Button>
+          <Stack>
+            <TextInput
+              label="Recipe Title"
+              placeholder="i.e. Margherita Pizza"
+              value={strMeal}
+              onChange={(event) => setStrMeal(event.currentTarget.value)}
+            />
+            <Select
+              label="Category"
+              placeholder="Pick value"
+              data={[
+                "Beef",
+                "Chicken",
+                "Dessert",
+                "Miscellaneous",
+                "Pork",
+                "Pasta",
+                "Starter",
+                "Vegetarian",
+                "Vegan",
+              ]}
+              value={strCategory}
+              onChange={(value) => setStrCategory(value)}
+            />
+            <TextInput
+              label="Cuisine"
+              placeholder="i.e. Italian"
+              value={strArea}
+              onChange={(event) => setStrArea(event.currentTarget.value)}
+            />
+            <Textarea
+              label="Instructions"
+              placeholder="How to make this dish?"
+              value={strInstructions}
+              onChange={(event) =>
+                setStrInstructions(event.currentTarget.value)
+              }
+            />
+            <TextInput
+              label="Image URL"
+              description="Upload a good photo of your dish"
+              placeholder="https://www.photos.com/pizza.png"
+              value={strMealThumb}
+              onChange={(event) => setStrMealThumb(event.currentTarget.value)}
+            />
+            <TextInput
+              label="Ingredients (comma separated)"
+              placeholder="i.e. Cheese, Tomato, Dough"
+              value={ingredients}
+              onChange={(event) => setIngredients(event.currentTarget.value)}
+            />
+            <TextInput
+              label="Measures (comma separated)"
+              placeholder="i.e. 1 cup, 2 tomatoes, 1 dough ball"
+              value={measures}
+              onChange={(event) => setMeasures(event.currentTarget.value)}
+            />
+            <Button type="submit">Save Changes</Button>
+          </Stack>
         </form>
       </Card>
-    </Center>
+    </Container>
   );
 }
 

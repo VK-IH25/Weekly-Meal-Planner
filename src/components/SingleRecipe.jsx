@@ -38,16 +38,8 @@ function SingleRecipe({ recipeList, deleteRecipe }) {
   }
 
   return (
-    <Container size="md" px="xs">
-      <Card
-        shadow="sm"
-        padding="lg"
-        radius="md"
-        withBorder
-        mt="md"
-        w="100%"
-        sx={{ maxWidth: 800 }}
-      >
+    <Container size="md" my="xl">
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
         <BackgroundImage
           src={recipeObj.strMealThumb}
           radius="sm"
