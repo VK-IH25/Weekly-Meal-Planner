@@ -11,7 +11,7 @@ import {
     TextInput,
     Title,
   } from '@mantine/core';
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import React from 'react'
 import { useState } from 'react'
 import {auth} from '../../firebase'
