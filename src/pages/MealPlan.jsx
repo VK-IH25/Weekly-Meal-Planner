@@ -19,7 +19,7 @@ function MealPlan(props) {
     const recipeDetails = props.recipeList.find((r) => r.idMeal === e.recipeId);
     if (recipeDetails) {
       [...Array(20).keys()].forEach((index) => {
-        const ingredient = recipeDetails[`strIngredient${index + 1}`].toCapit;
+        const ingredient = recipeDetails[`strIngredient${index + 1}`];
         const measure = recipeDetails[`strMeasure${index + 1}`];
         if (ingredient && measure) {
           if (shoppingList[ingredient]) {
