@@ -29,7 +29,7 @@ const AuthDetails = () => {
     }
 
   return (
-    <div>{authUser? <div><Menu closeOnClickOutside={true} closeOnItemClick={true}><MenuTarget><Avatar bg="white" color="green" radius="xl" /></MenuTarget> <MenuDropdown><MenuItem>Profile</MenuItem><Button onClick={userSignOut}>Sign Out</Button></MenuDropdown></Menu></div>  : <div><Menu><MenuTarget><Avatar color="white" radius="xl" /></MenuTarget> <MenuDropdown><MenuItem><Link to="/signin">Log In</Link></MenuItem><MenuItem><Link to="/signin">Register</Link></MenuItem></MenuDropdown></Menu></div>}</div>
+    <div>{authUser? <div><Menu closeOnClickOutside={true} closeOnItemClick={true}><MenuTarget><Avatar bg="white" color="green" radius="xl" /></MenuTarget> <MenuDropdown><MenuItem>Profile</MenuItem><Button onClick={userSignOut}>Sign Out</Button></MenuDropdown></Menu></div>  : <div><Menu><MenuTarget><Avatar color="white" radius="xl" /></MenuTarget> <MenuDropdown><MenuItem><Link to="/signin">Log In</Link></MenuItem><MenuItem><Link to="/signup">Register</Link></MenuItem></MenuDropdown></Menu></div>}</div>
   )
 }
 

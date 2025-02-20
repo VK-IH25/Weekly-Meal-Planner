@@ -22,8 +22,8 @@ import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
 import MealPlan from "./pages/MealPlan";
 import Board from './components/Board'
-import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
+import SignIn from "./components/auth/SignIn";
 import AuthDetails from "./components/auth/AuthDetails";
 
 
