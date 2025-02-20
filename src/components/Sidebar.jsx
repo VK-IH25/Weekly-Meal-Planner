@@ -13,32 +13,50 @@ const Sidebar = (props) => {
     <nav className="sidebar">
       <ul>
         <li>
-          <Link to="/" onClick={ props.toggleDesktop}>
+          <Link to="/" onClick={() => {
+            props.toggleDesktop();
+            props.toggleMobile();
+          }}>
             <FaHome /> Home
           </Link>
         </li>
         <li>
-          <Link to="/planner" onClick={ props.toggleDesktop}>
-          <FaCalendarAlt />           Weekly Planner
+          <Link to="/planner" onClick={() => {
+            props.toggleDesktop();
+            props.toggleMobile();
+          }}>
+            <FaCalendarAlt />           Weekly Planner
           </Link>
         </li>
         <li>
-          <Link to="/recipe-list" onClick={ props.toggleDesktop}>
+          <Link to="/recipe-list" onClick={() => {
+            props.toggleDesktop();
+            props.toggleMobile();
+          }}>
             <FaTh /> All recipes
           </Link>
         </li>
         <li>
-          <Link to="/add-recipe" onClick={ props.toggleDesktop}>
+          <Link to="/add-recipe" onClick={() => {
+            props.toggleDesktop();
+            props.toggleMobile();
+          }}>
             <IoMdAddCircle /> Add Recipe
           </Link>
         </li>
         <li>
-          <Link to="/mealplan" onClick={ props.toggleDesktop}>
+          <Link to="/mealplan" onClick={() => {
+            props.toggleDesktop();
+            props.toggleMobile();
+          }}>
             <FaShoppingCart /> Groceries List
           </Link>
         </li>
         <li>
-          <Link to="/about" onClick={ props.toggleDesktop}> 
+          <Link to="/about" onClick={() => {
+            props.toggleDesktop();
+            props.toggleMobile();
+          }}>
             <FaInfoCircle /> About
           </Link>
         </li>
