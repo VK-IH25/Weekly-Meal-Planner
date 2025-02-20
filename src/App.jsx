@@ -21,15 +21,12 @@ import EditRecipe from "./components/EditRecipe";
 import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
 import MealPlan from "./pages/MealPlan";
-import Board from './components/Board'
+import Board from "./components/Board";
 import SignUp from "./components/auth/SignUp";
 import SignIn from "./components/auth/SignIn";
 import AuthDetails from "./components/auth/AuthDetails";
 
-
-
 const App = () => {
-
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(false);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
 
@@ -38,19 +35,15 @@ const App = () => {
   const navigate = useNavigate();
 
   //local storage for meal plans
-
   useEffect(() => {
     try {
-      const history = JSON.parse(localStorage.getItem('mealPlan')) || [];
+      const history = JSON.parse(localStorage.getItem("mealPlan")) || [];
       setMealPlan(history);
     } catch (error) {
       console.error("Erro ao carregar mealPlan:", error);
       setMealPlan([]);
     }
   }, []);
-
-
-
 
   useEffect(() => {
     try {
@@ -80,7 +73,6 @@ const App = () => {
       )
       .then((r) => {
         setRecipeList(Object.values(r.data));
-        // console.log(r.data)
       })
       .catch((e) => console.log(e));
   }, []);
@@ -127,22 +119,6 @@ const App = () => {
       });
   };
 
-  //SCRIPT TO ADD MULTIPLE ITEMS TO DATABASE
-  //WORKS BY CLICKING CREATE RECIPE BUTTON
-
-  // async function handleCreate() {
-  //   try {
-  //     const allpromises = data.map((meal) =>
-  //       axios.post(
-  //         "https://weekly-meal-plan-4de4b-default-rtdb.europe-west1.firebasedatabase.app/meals.json",
-  //         meal
-  //       )
-  //     );
-  //     const resolve = await Promise.all(allpromises);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
   return (
     <AppShell
       header={{ height: 60 }}
@@ -171,16 +147,15 @@ const App = () => {
             size="sm"
             className="burger"
           />
-                  <Link to="/">
-          <Image src={logo} height={55} alt="logo" />
-
-        </Link>
+          <Link to="/">
+            <Image src={logo} height={55} alt="logo" />
+          </Link>
         </Group>
 
         <AuthDetails></AuthDetails>
       </AppShell.Header>
       <AppShell.Navbar>
-        <Sidebar toggleDesktop={toggleDesktop} toggleMobile={toggleMobile}/>
+        <Sidebar toggleDesktop={toggleDesktop} toggleMobile={toggleMobile} />
       </AppShell.Navbar>
       <AppShell.Main>
         <Routes>
@@ -226,12 +201,7 @@ const App = () => {
               <MealPlan mealPlan={mealPlan} recipeList={recipeList}></MealPlan>
             }
           />
-          <Route
-            path="/"
-            element={
-              <Board></Board>
-            }
-          />
+          <Route path="/" element={<Board></Board>} />
           <Route path="about" element={<About></About>} />
           <Route path="signin" element={<SignIn></SignIn>} />
           <Route path="signup" element={<SignUp />} />
