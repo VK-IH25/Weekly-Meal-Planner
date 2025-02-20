@@ -2,20 +2,17 @@ import React from "react";
 import {
   Container,
   Title,
+  Image,
   Text,
   Grid,
   Card,
-  Image,
   Anchor,
 } from "@mantine/core";
 import VictorImage from "../assets/img/profile/victor.jpeg";
 import KamranImage from "../assets/img/profile/kamran.png";
-import logodark from "../assets/img/logo-dark.png"
-
-
+import logodark from "../assets/img/logo-dark.png";
 
 function About() {
-
   const devMembers = [
     {
       name: "Victor Abussafi",
@@ -31,10 +28,8 @@ function About() {
     },
   ];
 
-
   return (
-    
-    <Container className="about-container" size="md" align="center">
+    <Container className="about-container" size="md" my="xl" align="center">
       <Title order={1} align="center" mb="md">
         Weekly Meal Planner Project
       </Title>
