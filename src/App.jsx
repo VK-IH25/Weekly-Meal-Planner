@@ -1,14 +1,7 @@
-import React from "react";
 import "@mantine/core/styles.css";
+import React from "react";
 import "./App.css";
-import {
-  AppShell,
-  Burger,
-  Group,
-  Skeleton,
-  Image,
-  AppShellFooter,
-} from "@mantine/core";
+import { AppShell, Burger, Group, Image } from "@mantine/core";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -28,9 +21,7 @@ import EditRecipe from "./components/EditRecipe";
 import About from "./pages/About";
 import AddRecipe from "./components/AddRecipe";
 import MealPlan from "./pages/MealPlan";
-import Board from './components/Board'
-
-
+import Board from "./components/Board";
 
 const App = () => {
   //DATA TO POPULATE DATABASE USED IN FUNCTION BELOW
@@ -374,7 +365,7 @@ const App = () => {
             hiddenFrom="sm"
             size="sm"
             className="burger"
-            styles={{ color: 'red' }}
+            styles={{ color: "red" }}
           />
           <Burger
             lineSize={3}
@@ -436,12 +427,7 @@ const App = () => {
               <MealPlan mealPlan={mealPlan} recipeList={recipeList}></MealPlan>
             }
           />
-           <Route
-            path="/"
-            element={
-              <Board></Board>
-            }
-          />
+          <Route path="/" element={<Board></Board>} />
           <Route path="about" element={<About></About>} />
         </Routes>
       </AppShell.Main>

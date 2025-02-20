@@ -30,8 +30,8 @@ header {
   padding: 1.3rem;
 }
 
-.header{
-  background-color: #3D8D7A;
+.header {
+  background-color: #3d8d7a;
 }
 
 .content {
@@ -77,8 +77,6 @@ footer {
 .draggable {
   touch-action: none;
 }
-
-
 
 @media (max-width: 1200px) {
   .side-bar {

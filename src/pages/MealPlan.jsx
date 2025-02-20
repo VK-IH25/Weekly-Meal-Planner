@@ -1,57 +1,89 @@
-import { Table, Container, Title, Text } from "@mantine/core";
+import { useState } from "react";
+import { Table, Checkbox, Container, Title } from "@mantine/core";
 
 function MealPlan(props) {
   if (!props.mealPlan.length) {
     return (
       <Container mt="md">
-        <Text>No meals available. Please add a meal to view details.</Text>
+        <Title order={3}>
+          No meals available. Please add a meal to view details.
+        </Title>
       </Container>
     );
   }
 
-  const selectedMeal = function () {
-    return props.mealPlan.map((e) => {
-      const recipeDetails = props.recipeList.find(
-        (r) => r.idMeal === e.recipeId
-      );
+  let shoppingList = {};
 
-      if (!recipeDetails) {
-        return (
-          <div key={e.recipeId}>
-            <Title order={4}>Unknown Recipe</Title>
-          </div>
-        );
-      }
+  props.mealPlan.forEach((e) => {
+    const recipeDetails = props.recipeList.find((r) => r.idMeal === e.recipeId);
+    if (recipeDetails) {
+      [...Array(20).keys()].forEach((index) => {
+        const ingredient = recipeDetails[`strIngredient${index + 1}`];
+        const measure = recipeDetails[`strMeasure${index + 1}`];
+        if (ingredient && measure) {
+          if (shoppingList[ingredient]) {
+            shoppingList[ingredient].push(measure);
+          } else {
+            shoppingList[ingredient] = [measure];
+          }
+        }
+      });
+    }
+  });
 
-      return (
-        <Container key={recipeDetails.idMeal} mt="md">
-          <Title order={4}>{recipeDetails.strMeal}</Title>
-          <Table style={{ textAlign: "left" }} mt={15}>
-            <thead>
-              <tr>
-                <th>Ingredient</th>
-                <th>Measure</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[...Array(20).keys()].map((index) => {
-                const ingredient = recipeDetails[`strIngredient${index + 1}`];
-                const measure = recipeDetails[`strMeasure${index + 1}`];
-                return ingredient && measure ? (
-                  <tr key={index}>
-                    <td>{ingredient}</td>
-                    <td>{measure}</td>
-                  </tr>
-                ) : null;
-              })}
-            </tbody>
-          </Table>
-        </Container>
-      );
-    });
+  const consolidateMeasurements = (measurements) => {
+    return measurements.join(" + ");
   };
 
-  return <>{selectedMeal()}</>;
+  const [purchasedItems, setPurchasedItems] = useState([]);
+
+  const togglePurchased = (ingredient) => {
+    setPurchasedItems((prev) =>
+      prev.includes(ingredient)
+        ? prev.filter((item) => item !== ingredient)
+        : [...prev, ingredient]
+    );
+  };
+
+  return (
+    <Container size={"xl"} mt="xl">
+      <Title order={3}>Shopping List</Title>
+      <Table mt={15}>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Ingredient</Table.Th>
+            <Table.Th>Total Measure</Table.Th>
+            <Table.Th>Purchased</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          {Object.entries(shoppingList).map(([ingredient, measures], index) => (
+            <Table.Tr
+              key={index}
+              bg={
+                purchasedItems.includes(ingredient)
+                  ? "var(--mantine-color-green-light)"
+                  : undefined
+              }
+              onClick={() => togglePurchased(ingredient)}
+              style={{ cursor: "pointer" }}
+            >
+              <Table.Td>{ingredient}</Table.Td>
+              <Table.Td>{consolidateMeasurements(measures)}</Table.Td>
+              <Table.Td>
+                <Checkbox
+                  aria-label="Mark as purchased"
+                  checked={purchasedItems.includes(ingredient)}
+                  onChange={() => togglePurchased(ingredient)}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </Table.Td>
+            </Table.Tr>
+          ))}
+        </Table.Tbody>
+      </Table>
+    </Container>
+  );
 }
 
 export default MealPlan;
