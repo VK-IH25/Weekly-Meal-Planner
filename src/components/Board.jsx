@@ -21,7 +21,7 @@ function Board() {
           <Flex gap={4} justify="center" align="center">
             <Link to="recipe-list"><Image radius="md" src={img10} alt="Image 10" h={100} /></Link>
 
-            <Link to="about">        <Image radius="md" src={img8} alt="Image 8" w={200} />
+            <Link to="about">        <Image className="mainimg" radius="md" src={img8} alt="Image 8" w={200} />
             </Link>
 
             <Link to="mealplan">        <Image radius="md" src={img9} alt="Image 9" h={100} />
