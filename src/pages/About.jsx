@@ -34,19 +34,21 @@ function About() {
         Weekly Meal Planner Project
       </Title>
       <Image src={logodark} w={400} mt={30}></Image>
-      <Text align="center" mb="xl">
-        This React.js project was developed by{" "}
-        <strong>{devMembers[0].name}</strong> and{" "}
-        <strong>{devMembers[1].name}</strong> as part of their learning journey
-        at Ironhack.
+      <Text align="center" my="xl">
+        <i>
+          This React.js project was developed by{" "}
+          <strong>{devMembers[0].name}</strong> and{" "}
+          <strong>{devMembers[1].name}</strong> as part of their learning
+          journey at Ironhack.
+        </i>
       </Text>
 
       <Title order={2} align="center" mb="lg">
         Meet the Devs
       </Title>
-      <Grid gutter="xl">
+      <Grid gutter="xl" justify="center">
         {devMembers.map((member, index) => (
-          <Grid.Col span={6} key={index}>
+          <Grid.Col span={4} key={index}>
             <Card shadow="sm" padding="lg" radius="md" withBorder>
               <Card.Section>
                 <Image
