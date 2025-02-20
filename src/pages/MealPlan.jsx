@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Table, Checkbox, Container, Title } from "@mantine/core";
 
 function MealPlan(props) {
@@ -35,20 +35,30 @@ function MealPlan(props) {
     return measurements.join(" + ");
   };
 
-  const [purchasedItems, setPurchasedItems] = useState([]);
+  // loading purchased items from local storage
+  const [purchasedItems, setPurchasedItems] = useState(
+    () => JSON.parse(localStorage.getItem("purchasedItems")) || []
+  );
 
+  // saving purchased items to local storage
+  useEffect(() => {
+    localStorage.setItem("purchasedItems", JSON.stringify(purchasedItems));
+  }, [purchasedItems]);
+
+  // toggling purchased items
   const togglePurchased = (ingredient) => {
-    setPurchasedItems((prev) =>
-      prev.includes(ingredient)
+    setPurchasedItems((prev) => {
+      const updatedList = prev.includes(ingredient)
         ? prev.filter((item) => item !== ingredient)
-        : [...prev, ingredient]
-    );
+        : [...prev, ingredient];
+      return updatedList;
+    });
   };
 
   return (
-    <Container size={"xl"} mt="xl">
+    <Container size={"xl"} my="xl">
       <Title order={3}>Shopping List</Title>
-      <Table mt={15}>
+      <Table my={15}>
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Ingredient</Table.Th>
@@ -72,6 +82,7 @@ function MealPlan(props) {
               <Table.Td>{consolidateMeasurements(measures)}</Table.Td>
               <Table.Td>
                 <Checkbox
+                  color="var(--oxford-blue)"
                   aria-label="Mark as purchased"
                   checked={purchasedItems.includes(ingredient)}
                   onChange={() => togglePurchased(ingredient)}
