@@ -33,8 +33,6 @@ const MainContent = (props) => {
     );
   };
 
- 
-
   // Function to remove a specific recipe from meal plan
   const clearRecipe = (day, mealTime, recipeId) => {
     props.setMealPlan((prev) =>
@@ -51,7 +49,6 @@ const MainContent = (props) => {
 
   //Drag and Drop
 
-
   const preventDefaultBehavior = (e) => {
     e.preventDefault();
   };
@@ -62,15 +59,12 @@ const MainContent = (props) => {
 
     props.setMealPlan((prev) => {
       const updatedMealPlan = [...prev, { day, mealTime, recipeId }];
-      localStorage.setItem('mealPlan', JSON.stringify(updatedMealPlan)); // Atualiza localStorage aqui
+      localStorage.setItem("mealPlan", JSON.stringify(updatedMealPlan)); // Atualiza localStorage aqui
       return updatedMealPlan;
     });
 
-
     setDragging(false);
   };
-
-
 
   //search bar
   const [query, setQuery] = useState("");
@@ -84,9 +78,9 @@ const MainContent = (props) => {
   );
 
   return (
-    <Container size="xl" px="md" >
+    <Container size="xxl" px="md" mt={20}>
       <Grid gutter="md" align="stretch">
-        <Grid.Col span={{ base: 12, sm: 3 }} >
+        <Grid.Col span={{ base: 12, sm: 2 }}>
           <Paper p="md" h="100%" bg={"var(--platinum)"}>
             <ScrollArea
               h={500}
@@ -113,9 +107,11 @@ const MainContent = (props) => {
             </ScrollArea>
           </Paper>
         </Grid.Col>
-        <Grid.Col span={{ base: 12, sm: 9 }}>
-          <Paper  p="md" h="100%" bg={"var(--platinum)"}>
-            <Title order={3} c={"var(--oxford-blue)"}>Weekly Meal Planner</Title>
+        <Grid.Col span={{ base: 12, sm: 10 }}>
+          <Paper p="md" h="100%" bg={"var(--platinum)"}>
+            <Title order={3} c={"var(--oxford-blue)"}>
+              Weekly Meal Planner
+            </Title>
             <ScrollArea>
               <Table
                 striped
@@ -125,7 +121,7 @@ const MainContent = (props) => {
               >
                 <thead>
                   <tr>
-                    <th >Meal Time</th>
+                    <th>Meal Time</th>
                     {daysOfWeek.map((day) => (
                       <th key={day}>{day}</th>
                     ))}
@@ -150,7 +146,6 @@ const MainContent = (props) => {
                                 meal.day === day && meal.mealTime === mealTime
                             ) // Filter meals for the current cell
                             .map((meal) => (
-                              
                               <div
                                 key={meal.recipeId}
                                 style={{
@@ -158,8 +153,9 @@ const MainContent = (props) => {
                                   alignItems: "center",
                                   marginBottom: "5px",
                                 }}
-                              ><Link to={`/recipe/${meal.recipeId}`}>
-                                {getRecipeName(meal.recipeId)}
+                              >
+                                <Link to={`/recipe/${meal.recipeId}`}>
+                                  {getRecipeName(meal.recipeId)}
                                 </Link>
                                 <CloseButton
                                   size="xs"
