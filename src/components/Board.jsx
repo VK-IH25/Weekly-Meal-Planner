@@ -1,4 +1,4 @@
-import { Center, SimpleGrid, Container, Image, Flex } from "@mantine/core";
+import { Center, Container, Image, Flex, Tooltip } from "@mantine/core";
 
 import { Link } from "react-router-dom";
 import img10 from "../assets/img/10.png";
@@ -15,22 +15,34 @@ function Board() {
           <Container>
             <Flex gap={4} justify="center" align="center">
               <Link to="recipe-list">
-                <Image radius="md" src={img10} alt="Image 10" h={100} />
+                <Tooltip label="Recipes List" position="top">
+                  <Image radius="md" src={img10} alt="Recipes List" h={100} />
+                </Tooltip>
               </Link>
-
               <Link to="about">
                 {" "}
-                <Image
-                  className="mainimg"
-                  radius="md"
-                  src={img8}
-                  alt="Image 8"
-                  w={150}
-                />
+                <Tooltip label="About Us" position="top">
+                  <Image
+                    className="mainimg"
+                    radius="md"
+                    src={img8}
+                    alt="About Us"
+                    w={150}
+                  />
+                </Tooltip>
               </Link>
 
               <Link to="mealplan">
-                <Image radius="md" src={img9} alt="Image 9" h={100} />
+                {" "}
+                <Tooltip label="Shopping List" position="top">
+                  <Image
+                    radius="md"
+                    src={img9}
+                    alt="Shopping List"
+                    title="Shopping List"
+                    h={100}
+                  />
+                </Tooltip>
               </Link>
             </Flex>
           </Container>
@@ -38,7 +50,16 @@ function Board() {
           {/* Second row with image 11 */}
           <Link to="planner">
             {" "}
-            <Image radius="md" src={img11} alt="Image 11" w={100} mt={4} />
+            <Tooltip label="Meal Plan" position="bottom">
+              <Image
+                radius="md"
+                src={img11}
+                alt="Meal Plan"
+                title="Meal Plan"
+                w={100}
+                mt={4}
+              />
+            </Tooltip>
           </Link>
         </Flex>
       </Center>
