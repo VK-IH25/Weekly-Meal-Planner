@@ -82,6 +82,7 @@ function AddRecipe(props) {
                 "Pork",
                 "Pasta",
                 "Starter",
+                "Thai",
                 "Vegetarian",
                 "Vegan",
               ]}
