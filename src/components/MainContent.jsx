@@ -14,9 +14,9 @@ import {
 import "../assets/styles/MainContent.css";
 import RecipeCards from "./RecipeCards";
 import { useState } from "react";
-import { FaSearch,   } from "react-icons/fa";
+import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { TbReload } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MainContent = (props) => {
   const daysOfWeek = [
@@ -29,6 +29,8 @@ const MainContent = (props) => {
     "Sunday",
   ];
   const mealTimes = ["Breakfast", "Lunch", "Dinner"];
+
+  const navigate = useNavigate();
 
   const getRecipeName = (id) => {
     return (
@@ -51,8 +53,8 @@ const MainContent = (props) => {
   };
 
   const clearBoard = () => {
-    props.setMealPlan([])
-  }
+    props.setMealPlan([]);
+  };
 
   //Drag and Drop
 
@@ -62,7 +64,7 @@ const MainContent = (props) => {
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData("text", e.target.id);
-    console.log(e)
+    console.log(e);
   };
 
   const handleDrop = (ev, day, mealTime) => {
@@ -74,8 +76,6 @@ const MainContent = (props) => {
       localStorage.setItem("mealPlan", JSON.stringify(updatedMealPlan)); // Atualiza localStorage aqui
       return updatedMealPlan;
     });
-
-    
   };
 
   //search bar
@@ -121,12 +121,31 @@ const MainContent = (props) => {
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 10 }}>
           <Paper p="md" h="100%" bg={"var(--platinum)"}>
-            <Flex justify="space-between">
-            <Title order={3} c={"var(--oxford-blue)"}>
-              Weekly Meal Planner
-            </Title>
-            <Button size="compact-md" variant="outline" color={"var(--oxford-blue)"} onClick={clearBoard}><TbReload /></Button>
+            <Flex justify="space-between" align="center">
+              <Title order={3} c={"var(--oxford-blue)"}>
+                Weekly Meal Planner
+              </Title>
+              <Flex gap="sm">
+                <Button
+                  size="compact-md"
+                  variant="outline"
+                  color={"var(--oxford-blue)"}
+                  onClick={() => navigate("/mealplan")}
+                >
+                  <FaShoppingCart />
+                </Button>
+
+                <Button
+                  size="compact-md"
+                  variant="outline"
+                  color={"var(--oxford-blue)"}
+                  onClick={clearBoard}
+                >
+                  <TbReload />
+                </Button>
+              </Flex>
             </Flex>
+
             <ScrollArea>
               <Table
                 striped
@@ -172,7 +191,10 @@ const MainContent = (props) => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                <Link id={meal.recipeId} to={`/recipe/${meal.recipeId}`}>
+                                <Link
+                                  id={meal.recipeId}
+                                  to={`/recipe/${meal.recipeId}`}
+                                >
                                   {getRecipeName(meal.recipeId)}
                                 </Link>
                                 <CloseButton

@@ -35,13 +35,7 @@ function Board() {
               <Link to="mealplan">
                 {" "}
                 <Tooltip label="Shopping List" position="top">
-                  <Image
-                    radius="md"
-                    src={img9}
-                    alt="Shopping List"
-                    title="Shopping List"
-                    h={100}
-                  />
+                  <Image radius="md" src={img9} alt="Shopping List" h={100} />
                 </Tooltip>
               </Link>
             </Flex>
@@ -51,14 +45,7 @@ function Board() {
           <Link to="planner">
             {" "}
             <Tooltip label="Meal Plan" position="bottom">
-              <Image
-                radius="md"
-                src={img11}
-                alt="Meal Plan"
-                title="Meal Plan"
-                w={100}
-                mt={4}
-              />
+              <Image radius="md" src={img11} alt="Meal Plan" w={100} mt={4} />
             </Tooltip>
           </Link>
         </Flex>
